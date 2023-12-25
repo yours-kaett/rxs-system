@@ -4,6 +4,7 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 if (isset($_SESSION['id'])) {
+    $client_id = $_SESSION['id'];
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -44,86 +45,98 @@ if (isset($_SESSION['id'])) {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="row">
-                            <div class="col-xxl-4 col-md-4">
+                            <div class="col-6">
+                                <?php
+                                if (isset($_GET['success'])) {
+                                ?>
+                                    <div class="alert alert-success d-flex align-items-center justify-content-between" role="alert">
+                                        <span><?php echo $_GET['success'], 'Your template has been saved successfully.' ?></span>
+                                        <a href="customize.php">
+                                            <button class="btn-close" type="button"></button>
+                                        </a>
+                                    </div>
+                                <?php
+                                }
+                                ?>
                                 <div class="card">
                                     <div class="card-body mt-4">
-                                        <form action="">
+                                        <form action="checking/customize-check.php" method="post">
                                             <div class="d-flex flex-column">
                                                 <h5>Background</h5>
                                                 <fieldset class="fieldset d-flex align-items-center">
                                                     <div class="fieldset-item me-2">
-                                                        <input class="form-check-input" type="radio" name="bg-color" id="bg-color2" value="bg-color2" style="display: none;" checked required>
-                                                        <label class="form-check-label rounded-radio" for="bg-color2" title="Blue">
+                                                        <input class="form-check-input" type="radio" name="bg_color" id="bg-primary" value="bg-primary" style="display: none;" checked required>
+                                                        <label class="form-check-label rounded-radio" for="bg-primary" title="Blue">
                                                             <div class="bg-primary p-3 rounded-5"></div>
                                                         </label>
                                                     </div>
                                                     <div class="fieldset-item me-2">
-                                                        <input class="form-check-input" type="radio" name="bg-color" id="bg-color3" value="bg-color3" style="display: none;" required>
-                                                        <label class="form-check-label rounded-radio" for="bg-color3" title="Gray">
+                                                        <input class="form-check-input" type="radio" name="bg_color" id="bg-secondary" value="bg-secondary" style="display: none;" required>
+                                                        <label class="form-check-label rounded-radio" for="bg-secondary" title="Gray">
                                                             <div class="bg-secondary p-3 rounded-5"></div>
                                                         </label>
                                                     </div>
                                                     <div class="fieldset-item me-2">
-                                                        <input class="form-check-input" type="radio" name="bg-color" id="bg-color4" value="bg-color4" style="display: none;" required>
-                                                        <label class="form-check-label rounded-radio" for="bg-color4" title="Green">
+                                                        <input class="form-check-input" type="radio" name="bg_color" id="bg-success" value="bg-success" style="display: none;" required>
+                                                        <label class="form-check-label rounded-radio" for="bg-success" title="Green">
                                                             <div class="bg-success p-3 rounded-5"></div>
                                                         </label>
                                                     </div>
                                                     <div class="fieldset-item me-2">
-                                                        <input class="form-check-input" type="radio" name="bg-color" id="bg-color5" value="bg-color5" style="display: none;" required>
-                                                        <label class="form-check-label rounded-radio" for="bg-color5" title="Yellow">
+                                                        <input class="form-check-input" type="radio" name="bg_color" id="bg-warning" value="bg-warning" style="display: none;" required>
+                                                        <label class="form-check-label rounded-radio" for="bg-warning" title="Yellow">
                                                             <div class="bg-warning p-3 rounded-5"></div>
                                                         </label>
                                                     </div>
                                                     <div class="fieldset-item me-2">
-                                                        <input class="form-check-input" type="radio" name="bg-color" id="bg-color6" value="bg-color6" style="display: none;" required>
-                                                        <label class="form-check-label rounded-radio" for="bg-color6" title="Red">
+                                                        <input class="form-check-input" type="radio" name="bg_color" id="bg-danger" value="bg-danger" style="display: none;" required>
+                                                        <label class="form-check-label rounded-radio" for="bg-danger" title="Red">
                                                             <div class="bg-danger p-3 rounded-5"></div>
                                                         </label>
                                                     </div>
                                                 </fieldset>
                                                 <hr class="my-3">
                                                 <h5>Surname</h5>
-                                                <input type="text" name="name-input" id="name-input" class="form-control">
+                                                <input type="text" name="name_input" id="name-input" class="form-control">
                                                 <div class="d-flex align-items-center mt-2">
                                                     <div class="me-4">
-                                                        <input class="form-check-input" type="radio" name="name-direction" id="name-position-top" value="name-position-top" checked required>
+                                                        <input class="form-check-input" type="radio" name="name_direction" id="name-position-top" value="name-position-top" checked required>
                                                         <label class="form-check-label" for="name-position-top" onclick="namePositionTopfn()">Top</label>
                                                     </div>
                                                     <div>
-                                                        <input class="form-check-input" type="radio" name="name-direction" id="name-position-bottom" value="name-position-bottom" required>
+                                                        <input class="form-check-input" type="radio" name="name_direction" id="name-position-bottom" value="name-position-bottom" required>
                                                         <label class="form-check-label" for="name-position-bottom" onclick="namePositionBottomfn()">Bottom</label>
                                                     </div>
                                                 </div>
                                                 <hr class="my-3">
                                                 <h5>Team Name</h5>
-                                                <input type="text" name="team-name-input" id="team-name-input" class="form-control">
+                                                <input type="text" name="team_name_input" id="team-name-input" class="form-control">
                                                 <div class="d-flex align-items-center mt-2">
                                                     <label for="" class="me-3">Front: </label>
                                                     <div class="me-4">
-                                                        <input class="form-check-input" type="radio" name="team-name-direction" id="team-name-position-top" value="team-name-position-top" checked required>
+                                                        <input class="form-check-input" type="radio" name="team_name_direction" id="team-name-position-top" value="team-name-position-top" checked required>
                                                         <label class="form-check-label" for="team-name-position-top" onclick="teamnamePositionTopfn()">Top</label>
                                                     </div>
                                                     <div>
-                                                        <input class="form-check-input" type="radio" name="team-name-direction" id="team-name-position-bottom" value="team-name-position-bottom" required>
+                                                        <input class="form-check-input" type="radio" name="team_name_direction" id="team-name-position-bottom" value="team-name-position-bottom" required>
                                                         <label class="form-check-label" for="team-name-position-bottom" onclick="namePositionBottomfn()">Bottom</label>
                                                     </div>
                                                 </div>
                                                 <hr class="my-3">
                                                 <h5>Number</h5>
-                                                <input type="number" name="number-input" id="number-input" class="form-control">
+                                                <input type="number" name="number_input" id="number-input" class="form-control">
                                                 <div class="d-flex align-items-center mt-2">
                                                     <label for="" class="me-3">Front: </label>
                                                     <div class="me-3">
-                                                        <input class="form-check-input" type="radio" name="number-direction" id="number-position-front-left" value="number-position-front-left" checked required>
+                                                        <input class="form-check-input" type="radio" name="number_direction" id="number-position-front-left" value="number-position-front-left" checked required>
                                                         <label class="form-check-label" for="number-position-front-left" onclick="numberPositionFrontRightfn()">Top Right</label>
                                                     </div>
                                                     <div class="me-3">
-                                                        <input class="form-check-input" type="radio" name="number-direction" id="number-position-front-right" value="number-position-front-right" required>
+                                                        <input class="form-check-input" type="radio" name="number_direction" id="number-position-front-right" value="number-position-front-right" required>
                                                         <label class="form-check-label" for="number-position-front-right" onclick="numberPositionFrontLeftfn()">Top Left</label>
                                                     </div>
                                                     <div>
-                                                        <input class="form-check-input" type="radio" name="number-direction" id="blank" onclick="blankFn()" required>
+                                                        <input class="form-check-input" type="radio" name="number_direction" id="blank" onclick="blankFn()" required>
                                                         <label class="form-check-label" for="blank">Blank</label>
                                                     </div>
                                                 </div>
@@ -171,35 +184,51 @@ if (isset($_SESSION['id'])) {
                                                 </fieldset>
                                                 <hr class="my-3">
                                                 <h5>Fonts</h5>
-                                                <select name="" id="font" class="form-select">
+                                                <select name="font" id="font" class="form-select">
                                                     <option disabled selected>-select-</option>
                                                     <option value="Arial">Arial</option>
                                                     <option value="Times New Roman">Times New Roman</option>
                                                     <option value="Courier New">Courier New</option>
                                                     <option value="Consolas">Consolas</option>
                                                 </select>
+                                                <hr class="my-3">
+                                                <button class="btn btn-success p-3" type="submit">Save Template</button>
+                                                <a href="my-customize.php">
+                                                    <button class="btn btn-primary p-3 mt-2 w-100" type="button">My Templates</button>
+                                                </a>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xxl-7 col-md-6">
+                            <div class="col-6">
                                 <div class="print">
                                     <div class="mt-4">
                                         <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12 relative draggable">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 relative">
                                                 <h5 style="position: relative;">Front</h5>
                                                 <div style="position: relative;">
-                                                    <input type="number" id="number-position-front1" readonly />
-                                                    <input type="number" id="number-position-front2" readonly />
+                                                    <input type="number" value="" id="number-position-front1" readonly />
+                                                    <input type="number" value="" id="number-position-front2" readonly />
                                                     <input type="text" id="team-name-position-front1" readonly />
                                                     <input type="text" id="team-name-position-front2" readonly />
                                                     <i class="bx bxs-t-shirt shirts" id="front" style="color: #007BFF; position: relative;"></i>
-                                                    <img src="IMG/logos/GSW.png" id="GSW_logo" style="display: none; position: relative; left: 85px; bottom: 145px; width: 80px; z-index: 1000; border-radius: 50%;" alt="">
-                                                    <img src="IMG/logos/MAVERICKS.png" id="MAVERICKS_logo" style="display: none; position: relative; left: 85px; bottom: 145px; width: 80px; z-index: 1000; border-radius: 50%" alt="">
-                                                    <img src="IMG/logos/RAPTORS.png" id="RAPTORS_logo" style="display: none; position: relative; left: 85px; bottom: 145px; width: 80px; z-index: 1000; border-radius: 50%" alt="">
-                                                    <img src="IMG/logos/WOLVES.png" id="WOLVES_logo" style="display: none; position: relative; left: 85px; bottom: 145px; width: 80px; z-index: 1000; border-radius: 50%;" alt="">
                                                     <?php
+                                                    $stmt = $conn->prepare(' SELECT * FROM tbl_logos ORDER BY id ASC');
+                                                    $stmt->execute();
+                                                    $result = $stmt->get_result();
+                                                    while ($row = $result->fetch_assoc()) {
+                                                        $num = $row['id'];
+                                                        $img_url = $row['img_url'];
+                                                        echo '
+                                                            <img src="IMG/logos/' . $img_url . '" 
+                                                            id="IMG/logos/' . $img_url . '_logo" 
+                                                            style="display: none; position: relative; 
+                                                            left: 85px; bottom: 145px; width: 80px; 
+                                                            z-index: 1000; border-radius: 50%;" alt="">
+                                                        ';
+                                                    }
+
                                                     $stmt = $conn->prepare(' SELECT * FROM tbl_patterns ORDER BY id ASC');
                                                     $stmt->execute();
                                                     $result = $stmt->get_result();
@@ -223,7 +252,7 @@ if (isset($_SESSION['id'])) {
                                                 <div style="position: relative;">
                                                     <input type="text" id="name-position-back1" readonly>
                                                     <input type="text" id="name-position-back2" readonly>
-                                                    <i class="bx bxs-t-shirt shirts" id="back" style="color: #007BFF; position: relative;"></i>
+                                                    <i class="bx bxs-t-shirt shirts mt-4" id="back" style="color: #007BFF; position: relative;"></i>
                                                     <input type="number" id="number-position-back" readonly>
                                                     <?php
                                                     $stmt = $conn->prepare(' SELECT * FROM tbl_patterns ORDER BY id ASC');
@@ -258,7 +287,7 @@ if (isset($_SESSION['id'])) {
         <script src="assets/js/main.js" defer></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                var radioName = document.querySelectorAll('input[name="bg-color"]');
+                var radioName = document.querySelectorAll('input[name="bg_color"]');
                 var frontIcon = document.getElementById('front');
                 var backIcon = document.getElementById('back');
                 var nameInput = document.getElementById('name-input');
@@ -294,19 +323,19 @@ if (isset($_SESSION['id'])) {
                     if (color === 'bg-color1') {
                         frontIcon.style.color = '#000';
                         backIcon.style.color = '#000';
-                    } else if (color === 'bg-color2') {
+                    } else if (color === 'bg-primary') {
                         frontIcon.style.color = '#007bff';
                         backIcon.style.color = '#007bff';
-                    } else if (color === 'bg-color3') {
+                    } else if (color === 'bg-secondary') {
                         frontIcon.style.color = '#6c757d';
                         backIcon.style.color = '#6c757d';
-                    } else if (color === 'bg-color4') {
+                    } else if (color === 'bg-success') {
                         frontIcon.style.color = '#28a745';
                         backIcon.style.color = '#28a745';
-                    } else if (color === 'bg-color5') {
+                    } else if (color === 'bg-warning') {
                         frontIcon.style.color = '#ffc107';
                         backIcon.style.color = '#ffc107';
-                    } else if (color === 'bg-color6') {
+                    } else if (color === 'bg-danger') {
                         frontIcon.style.color = '#dc3545';
                         backIcon.style.color = '#dc3545';
                     }
@@ -390,31 +419,31 @@ if (isset($_SESSION['id'])) {
             });
 
             function logo1Fn() {
-                document.getElementById("GSW_logo").style.display = "block";
-                document.getElementById("WOLVES_logo").style.display = "none";
-                document.getElementById("MAVERICKS_logo").style.display = "none";
-                document.getElementById("RAPTORS_logo").style.display = "none";
-            }
-
-            function logo4Fn() {
-                document.getElementById("WOLVES_logo").style.display = "block";
-                document.getElementById("GSW_logo").style.display = "none";
-                document.getElementById("MAVERICKS_logo").style.display = "none";
-                document.getElementById("RAPTORS_logo").style.display = "none";
+                document.getElementById("IMG/logos/GSW.png_logo").style.display = "block";
+                document.getElementById("IMG/logos/WOLVES.png_logo").style.display = "none";
+                document.getElementById("IMG/logos/MAVERICKS.png_logo").style.display = "none";
+                document.getElementById("IMG/logos/RAPTORS.png_logo").style.display = "none";
             }
 
             function logo2Fn() {
-                document.getElementById("MAVERICKS_logo").style.display = "block";
-                document.getElementById("GSW_logo").style.display = "none";
-                document.getElementById("WOLVES_logo").style.display = "none";
-                document.getElementById("RAPTORS_logo").style.display = "none";
+                document.getElementById("IMG/logos/MAVERICKS.png_logo").style.display = "block";
+                document.getElementById("IMG/logos/GSW.png_logo").style.display = "none";
+                document.getElementById("IMG/logos/WOLVES.png_logo").style.display = "none";
+                document.getElementById("IMG/logos/RAPTORS.png_logo").style.display = "none";
             }
 
             function logo3Fn() {
-                document.getElementById("RAPTORS_logo").style.display = "block";
-                document.getElementById("MAVERICKS_logo").style.display = "none";
-                document.getElementById("GSW_logo").style.display = "none";
-                document.getElementById("WOLVES_logo").style.display = "none";
+                document.getElementById("IMG/logos/RAPTORS.png_logo").style.display = "block";
+                document.getElementById("IMG/logos/MAVERICKS.png_logo").style.display = "none";
+                document.getElementById("IMG/logos/GSW.png_logo").style.display = "none";
+                document.getElementById("IMG/logos/WOLVES.png_logo").style.display = "none";
+            }
+
+            function logo4Fn() {
+                document.getElementById("IMG/logos/WOLVES.png_logo").style.display = "block";
+                document.getElementById("IMG/logos/GSW.png_logo").style.display = "none";
+                document.getElementById("IMG/logos/MAVERICKS.png_logo").style.display = "none";
+                document.getElementById("IMG/logos/RAPTORS.png_logo").style.display = "none";
             }
 
             function pattern1Fn() {
