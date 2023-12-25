@@ -66,73 +66,37 @@ if (isset($_SESSION['id'])) {
                                         <div class="col-lg-4 col-md-4 col-sm-4 relative">
                                             <h5 style="position: relative;">Front</h5>
                                             <div style="position: relative;">
-                                                <input type="number" value="<?php echo $number_input ?>" id="number-position-front1" readonly />
-                                                <input type="number" value="<?php echo $number_input ?>" id="number-position-front2" readonly />
-                                                <input type="text" value="<?php echo $team_name_input ?>" id="team-name-position-front1" readonly />
-                                                <input type="text" value="<?php echo $team_name_input ?>" id="team-name-position-front2" readonly />
+                                                <input type="number" value="<?php echo $number_input ?>" style="font-family: <?php echo $font ?>" id="number-position-front1" readonly />
+                                                <input type="number" value="<?php echo $number_input ?>" style="font-family: <?php echo $font ?>" id="number-position-front2" readonly />
+                                                <input type="text" value="<?php echo $team_name_input ?>" style="font-family: <?php echo $font ?>" id="team-name-position-front1" readonly />
+                                                <input type="text" value="<?php echo $team_name_input ?>" style="font-family: <?php echo $font ?>" id="team-name-position-front2" readonly />
                                                 <i class="bx bxs-t-shirt shirts" style="color: <?php echo $bg_color; ?>; position: relative;"></i>
-                                                <?php
-                                                $stmt = $conn->prepare(' SELECT * FROM tbl_logos ORDER BY id ASC');
-                                                $stmt->execute();
-                                                $result = $stmt->get_result();
-                                                while ($row = $result->fetch_assoc()) {
-                                                    $num = $row['id'];
-                                                    $img_url = $row['img_url'];
-                                                    echo '
-                                                            <img src="IMG/logos/' . $img_url . '" 
-                                                            id="IMG/logos/' . $img_url . '_logo" 
-                                                            style="display: none; position: relative; 
-                                                            left: 85px; bottom: 145px; width: 80px; 
+                                                <img src="IMG/logos/<?php echo $logo; ?>" style="position: relative; 
+                                                            right: 170px; bottom: 85px; width: 80px; 
                                                             z-index: 1000; border-radius: 50%;" alt="">
-                                                        ';
-                                                }
-
-                                                $stmt = $conn->prepare(' SELECT * FROM tbl_patterns ORDER BY id ASC');
-                                                $stmt->execute();
-                                                $result = $stmt->get_result();
-                                                while ($row = $result->fetch_assoc()) {
-                                                    $num = $row['id'];
-                                                    $img_url = $row['img_url'];
-                                                    echo '
-                                                            <img src="IMG/patterns/' . $img_url . '" 
-                                                            id="f_pattern' . $num . '" 
-                                                            style="display: none; position: relative; 
+                                                <img src="IMG/patterns/<?php echo $pattern; ?>" style="position: relative; 
                                                             left: 5px; bottom: 310px; width: 240px; 
                                                             height: 300px; z-index: 1000; 
                                                             mix-blend-mode: overlay; opacity: 30%;" alt="">
-                                                        ';
-                                                }
-                                                ?>
+
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-4 relative">
                                             <h5 style="position: relative;">Back</h5>
                                             <div style="position: relative;">
-                                                <input type="text" value="<?php echo $name_input; ?>" id="name-position-back1" readonly>
-                                                <input type="text" value="<?php echo $name_input; ?>" id="name-position-back2" readonly>
+                                                <input type="text" value="<?php echo $name_input; ?>" style="font-family: <?php echo $font ?>" id="name-position-back1" readonly>
+                                                <input type="text" value="<?php echo $name_input; ?>" style="font-family: <?php echo $font ?>" id="name-position-back2" readonly>
                                                 <i class="bx bxs-t-shirt shirts mt-4" id="back" style="color: <?php echo $bg_color; ?>; position: relative;"></i>
-                                                <input type="number" value="<?php echo $number_input; ?>" id="number-position-back" readonly>
-                                                <?php
-                                                $stmt = $conn->prepare(' SELECT * FROM tbl_patterns ORDER BY id ASC');
-                                                $stmt->execute();
-                                                $result = $stmt->get_result();
-                                                while ($row = $result->fetch_assoc()) {
-                                                    $num = $row['id'];
-                                                    $img_url = $row['img_url'];
-                                                    echo '
-                                                        <img src="IMG/patterns/' . $img_url . '" id="b_pattern' . $num . '" 
-                                                        style="display: none; position: relative; left: 5px; 
+                                                <input type="number" value="<?php echo $number_input; ?>" style="font-family: <?php echo $font ?>" id="number-position-back" readonly>
+                                                <img src="IMG/patterns/<?php echo $pattern; ?>.png" style="position: relative; left: 5px; 
                                                         bottom: 320px; width: 240px; z-index: 1000; 
                                                         mix-blend-mode: overlay; opacity: 30%;" alt="">
-                                                        ';
-                                                }
-                                                ?>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <button onclick="PrintPage()" class="btn btn-success btn-lg" type="button">Print this template</button>
+                            <!-- <button onclick="printCustomizedShirt()" class="btn btn-success btn-lg" type="button">Print this template</button> -->
                         </div>
                     </div>
                 </div>
@@ -155,12 +119,12 @@ if (isset($_SESSION['id'])) {
             //     });
             // }
 
-            function PrintPage() {
-                window.print();
-                setTimeout(function() {
-                    window.close()
-                }, 900);
-            }
+            // function PrintPage() {
+            //     window.print();
+            //     setTimeout(function() {
+            //         window.close()
+            //     }, 900);
+            // }
         </script>
     </body>
 

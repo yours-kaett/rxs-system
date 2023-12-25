@@ -65,32 +65,32 @@ if (isset($_SESSION['id'])) {
                                                 <h5>Background</h5>
                                                 <fieldset class="fieldset d-flex align-items-center">
                                                     <div class="fieldset-item me-2">
-                                                        <input class="form-check-input" type="radio" name="bg_color" id="bg-primary" value="bg-primary" style="display: none;" checked required>
-                                                        <label class="form-check-label rounded-radio" for="bg-primary" title="Blue">
+                                                        <input class="form-check-input" type="radio" name="bg_color" id="#007bff" value="#007bff" style="display: none;" checked required>
+                                                        <label class="form-check-label rounded-radio" for="#007bff" title="Blue">
                                                             <div class="bg-primary p-3 rounded-5"></div>
                                                         </label>
                                                     </div>
                                                     <div class="fieldset-item me-2">
-                                                        <input class="form-check-input" type="radio" name="bg_color" id="bg-secondary" value="bg-secondary" style="display: none;" required>
-                                                        <label class="form-check-label rounded-radio" for="bg-secondary" title="Gray">
+                                                        <input class="form-check-input" type="radio" name="bg_color" id="#6c757d" value="#6c757d" style="display: none;" required>
+                                                        <label class="form-check-label rounded-radio" for="#6c757d" title="Gray">
                                                             <div class="bg-secondary p-3 rounded-5"></div>
                                                         </label>
                                                     </div>
                                                     <div class="fieldset-item me-2">
-                                                        <input class="form-check-input" type="radio" name="bg_color" id="bg-success" value="bg-success" style="display: none;" required>
-                                                        <label class="form-check-label rounded-radio" for="bg-success" title="Green">
+                                                        <input class="form-check-input" type="radio" name="bg_color" id="#28a745" value="#28a745" style="display: none;" required>
+                                                        <label class="form-check-label rounded-radio" for="#28a745" title="Green">
                                                             <div class="bg-success p-3 rounded-5"></div>
                                                         </label>
                                                     </div>
                                                     <div class="fieldset-item me-2">
-                                                        <input class="form-check-input" type="radio" name="bg_color" id="bg-warning" value="bg-warning" style="display: none;" required>
-                                                        <label class="form-check-label rounded-radio" for="bg-warning" title="Yellow">
+                                                        <input class="form-check-input" type="radio" name="bg_color" id="#ffc107" value="#ffc107" style="display: none;" required>
+                                                        <label class="form-check-label rounded-radio" for="#ffc107" title="Yellow">
                                                             <div class="bg-warning p-3 rounded-5"></div>
                                                         </label>
                                                     </div>
                                                     <div class="fieldset-item me-2">
-                                                        <input class="form-check-input" type="radio" name="bg_color" id="bg-danger" value="bg-danger" style="display: none;" required>
-                                                        <label class="form-check-label rounded-radio" for="bg-danger" title="Red">
+                                                        <input class="form-check-input" type="radio" name="bg_color" id="#dc3545" value="#dc3545" style="display: none;" required>
+                                                        <label class="form-check-label rounded-radio" for="#dc3545" title="Red">
                                                             <div class="bg-danger p-3 rounded-5"></div>
                                                         </label>
                                                     </div>
@@ -152,7 +152,7 @@ if (isset($_SESSION['id'])) {
                                                         $img_url = $row['img_url'];
                                                         echo '
                                                         <div class="fieldset-item me-2">
-                                                            <input class="form-check-input" type="radio" name="logo" id="logo' . $num . '" value="logo' . $num . '" style="position: absolute; left: -9999px;" required>
+                                                            <input class="form-check-input" type="radio" name="logo" id="logo' . $num . '" value="' . $img_url . '" style="position: absolute; left: -9999px;" required>
                                                             <label class="form-check-label rounded-radio" for="logo' . $num . '" onclick="logo' . $num . 'Fn()">
                                                                 <img src="IMG/logos/' . $img_url . '" width="50" style="cursor: pointer; border-radius: 50%" alt="">
                                                             </label>
@@ -184,7 +184,7 @@ if (isset($_SESSION['id'])) {
                                                 </fieldset>
                                                 <hr class="my-3">
                                                 <h5>Fonts</h5>
-                                                <select name="font" id="font" class="form-select">
+                                                <select name="font" id="font" class="form-select" required>
                                                     <option disabled selected>-select-</option>
                                                     <option value="Arial">Arial</option>
                                                     <option value="Times New Roman">Times New Roman</option>
@@ -208,10 +208,48 @@ if (isset($_SESSION['id'])) {
                                             <div class="col-lg-6 col-md-6 col-sm-12 relative">
                                                 <h5 style="position: relative;">Front</h5>
                                                 <div style="position: relative;">
-                                                    <input type="number" value="" id="number-position-front1" readonly />
-                                                    <input type="number" value="" id="number-position-front2" readonly />
-                                                    <input type="text" id="team-name-position-front1" readonly />
-                                                    <input type="text" id="team-name-position-front2" readonly />
+                                                    <input type="number" value="position: relative;
+    top: 100px;
+    left: 60px;
+    background-color: transparent;
+    border: none;
+    width: 50px;
+    text-align: center;
+    outline: none;
+    display: flex;
+    color: #fff;
+    z-index: 1;" id="number-position-front1" readonly />
+                                                    <input type="number" value="position: relative;
+    top: 100px;
+    left: 150px;
+    background-color: transparent;
+    border: none;
+    width: 50px;
+    text-align: center;
+    outline: none;
+    display: none;
+    color: #fff;
+        z-index: 9999;" id="number-position-front2" readonly />
+                                                    <input type="text" value="position: relative;
+    top: 110px;
+    left: 28px;
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    outline: none;
+    display: flex;
+    color: #fff;
+    z-index: 1;" id="team-name-position-front1" readonly />
+                                                    <input type="text" value="position: relative;
+    top: 205px;
+    left: 30px;
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    outline: none;
+    display: none;
+    color: #fff;
+    z-index: 1;" id="team-name-position-front2" readonly />
                                                     <i class="bx bxs-t-shirt shirts" id="front" style="color: #007BFF; position: relative;"></i>
                                                     <?php
                                                     $stmt = $conn->prepare(' SELECT * FROM tbl_logos ORDER BY id ASC');
@@ -250,10 +288,39 @@ if (isset($_SESSION['id'])) {
                                             <div class="col-lg-6 col-md-6 col-sm-12 relative">
                                                 <h5 style="position: relative;">Back</h5>
                                                 <div style="position: relative;">
-                                                    <input type="text" id="name-position-back1" readonly>
-                                                    <input type="text" id="name-position-back2" readonly>
+                                                    <input type="text" value="position: relative;
+    top: 110px;
+        left: 30px;
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    outline: none;
+    display: flex;
+    color: #fff;
+    z-index: 1;" id="name-position-back1" readonly>
+                                                    <input type="text" value="position: relative;
+    top: 210px;
+    left: 30px;
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    outline: none;
+    display: none;
+    color: #fff;
+    z-index: 1;" id="name-position-back2" readonly>
                                                     <i class="bx bxs-t-shirt shirts mt-4" id="back" style="color: #007BFF; position: relative;"></i>
-                                                    <input type="number" id="number-position-back" readonly>
+                                                    <input type="number" value="position: relative;
+    bottom: 160px;
+    left: 68px;
+    background-color: transparent;
+    font-size: 60px;
+    border: none;
+    width: 120px;
+    text-align: center;
+    outline: none;
+        display: flex;
+        color: #fff;
+        z-index: 1;" id="number-position-back" readonly>
                                                     <?php
                                                     $stmt = $conn->prepare(' SELECT * FROM tbl_patterns ORDER BY id ASC');
                                                     $stmt->execute();
@@ -320,22 +387,19 @@ if (isset($_SESSION['id'])) {
                 });
 
                 function updateIconsColor(color) {
-                    if (color === 'bg-color1') {
-                        frontIcon.style.color = '#000';
-                        backIcon.style.color = '#000';
-                    } else if (color === 'bg-primary') {
+                    if (color === '#007bff') {
                         frontIcon.style.color = '#007bff';
                         backIcon.style.color = '#007bff';
-                    } else if (color === 'bg-secondary') {
+                    } else if (color === '#6c757d') {
                         frontIcon.style.color = '#6c757d';
                         backIcon.style.color = '#6c757d';
-                    } else if (color === 'bg-success') {
+                    } else if (color === '#28a745') {
                         frontIcon.style.color = '#28a745';
                         backIcon.style.color = '#28a745';
-                    } else if (color === 'bg-warning') {
+                    } else if (color === '#ffc107') {
                         frontIcon.style.color = '#ffc107';
                         backIcon.style.color = '#ffc107';
-                    } else if (color === 'bg-danger') {
+                    } else if (color === '#dc3545') {
                         frontIcon.style.color = '#dc3545';
                         backIcon.style.color = '#dc3545';
                     }
