@@ -1,0 +1,136 @@
+<?php
+include 'database_connection.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<?php include 'includes/head.php' ?>
+
+<body>
+
+  <?php include 'includes/header.php' ?>
+
+  <section id="account">
+    <div class="bg-img">
+      <div class="content">
+        <header>Sign Up</header>
+        <form action="checking/client-signup-check.php" method="POST">
+          <div class="field mb-2">
+            <span class="bi bi-at"></span>
+            <input type="email" name="email" id="email" placeholder="Email" required>
+          </div>
+          <div class="field mb-2">
+            <span class="bi bi-hash"></span>
+            <input type="text" name="username" id="username" placeholder="Username" required>
+          </div>
+          <div class="field mb-2">
+            <span class="bi bi-lock"></span>
+            <input type="password" name="password" id="password" class="pass-key" placeholder="Password" required>
+            <span class="show">SHOW</span>
+          </div>
+          <div class="">
+            <button id="submit" class="btn-login p-3 w-100 me-5 d-flex align-items-center justify-content-center bg-secondary" type="submit" onclick="submitFn()">
+              <span id="login">Login</span>
+              <span id="spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            </button>
+          </div>
+        </form>
+        <div class="signup mt-3">
+          Has already an account? <a href="client-login.php">Login here.</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    const pass_field = document.querySelector('.pass-key');
+    const showBtn = document.querySelector('.show');
+    showBtn.addEventListener('click', function() {
+      if (pass_field.type === "password") {
+        pass_field.type = "text";
+        showBtn.textContent = "HIDE";
+        showBtn.style.color = "#3498db";
+      } else {
+        pass_field.type = "password";
+        showBtn.textContent = "SHOW";
+        showBtn.style.color = "#222";
+      }
+    });
+  </script>
+  <footer class="section-p1">
+    <div class="col">
+      <img class="logo" src="IMG/LOGO.png" alt="">
+      <h4>Contact</h4>
+      <p><strong>Address:</strong> Corner Quezon- Katalbas St. 6122 Sagay City, Philippines</p>
+      <p><strong>Phone:</strong> 0969 170 0569</p>
+      <p><strong>Hours:</strong> Always Open</p>
+      <h4>Follow Us</h4>
+      <div class="icon">
+        <i class="bi bi-facebook" style="font-size:24px"></i>
+        <i class="bi bi-twitter" style="font-size:24px"></i>
+        <i class="bi bi-youtube-play" style="font-size:24px"></i>
+        <i class="bi bi-pinterest-p" style="font-size:24px"></i>
+        <i class="bi bi-instagram" style="font-size:24px"></i>
+      </div>
+    </div>
+    <div class="col">
+      <h4>About Us</h4>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="col">
+      <h4>My Account</h4>
+      <a href="#">Sign In</a>
+      <a href="#">View Cart</a>
+      <a href="#">My Saved Designs</a>
+      <a href="#">Track My Order</a>
+      <a href="#">Help</a>
+    </div>
+    <!-- <div class="col">
+      <h4>Secure Payment Gateways</h4>
+      <div class="row">
+        <img src="IMG/products/gcash.png">
+      </div>
+    </div> -->
+    <div class="copyright">
+      <p>2023, Roxie Full Sublimation Apparel</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    let email = document.getElementById("email");
+    let username = document.getElementById("username");
+    let password = document.getElementById("password");
+    let submit = document.getElementById("submit");
+
+    function signup() {
+      const emailValue = email.value.trim();
+      const usernameValue = username.value.trim();
+      const passwordValue = password.value.trim();
+      if (emailValue !== '' && usernameValue !== '' && passwordValue !== '') {
+        submit.removeAttribute('disabled');
+        submit.classList.remove("bg-secondary");
+        submit.style.color = "#d9fef2";
+        submit.style.cursor = "pointer";
+      } else {
+        submit.setAttribute('disabled', 'disabled');
+        submit.classList.add("bg-secondary");
+        submit.style.color = "#cccccc";
+        submit.style.cursor = "not-allowed";
+      }
+    }
+    email.addEventListener("input", signup);
+    username.addEventListener("input", signup);
+    password.addEventListener("input", signup);
+    signup();
+
+    function submitFn() {
+      document.getElementById('login').style.display = "none"
+      document.getElementById('spinner').style.display = "flex"
+      document.getElementById('spinner').style.alignItems = "center"
+      document.getElementById('spinner').style.justifyContent = "center"
+    }
+  </script>
+</body>
+
+</html>
