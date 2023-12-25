@@ -1,6 +1,6 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
-        <i class="bi bi-list toggle-sidebar-btn"></i>&nbsp; 
+        <i class="bi bi-list toggle-sidebar-btn"></i>&nbsp;
         <a href="index.html" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">RXS Shop</span>
@@ -35,8 +35,8 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <i class="bi bi-box-arrow-right"></i>
+                        <a class="dropdown-item d-flex align-items-center" href="logout.php">
+                            <i class="bi bi-signout"></i>
                             <span>Sign Out</span>
                         </a>
                     </li>

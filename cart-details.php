@@ -21,6 +21,8 @@ if (isset($_SESSION['id'])) {
                         <div class="col-12">
                             <?php
                             $stmt = $conn->prepare(' SELECT
+                            tbl_orders.img_url,
+                            tbl_orders.shirt_id,
                             tbl_orders.invoice_number,
                             tbl_orders.team_name,
                             tbl_transaction_status.transaction_status
@@ -31,9 +33,11 @@ if (isset($_SESSION['id'])) {
                             $stmt->execute();
                             $result = $stmt->get_result();
                             $row = $result->fetch_assoc();
+                            $shirt_id = $row['shirt_id'];
                             $invoice_number = $row['invoice_number'];
                             $team_name = $row['team_name'];
                             $transaction_status = $row['transaction_status'];
+                            $img_url = $row['img_url'];
                             if ($transaction_status === "On-cart") {
                                 $visibility = 'hidden';
                             }
@@ -50,6 +54,9 @@ if (isset($_SESSION['id'])) {
                                 $visibility = 'hidden';
                             }
                             echo "
+                                <a href='details.php?id=$shirt_id'>
+                                    <img src='IMG/products/$img_url' alt='$img_url' width='200' height='200' class='my-3'>
+                                </a>
                                 <h3>Team Name: $team_name</h3>
                                 <h3>Invoice Number: $invoice_number</h3>
                                 <h3>Transaction Status: 
@@ -90,15 +97,13 @@ if (isset($_SESSION['id'])) {
             <div class="table-responsive rounded">
                 <table class="table">
                     <colgroup>
-                        <col width="20%">
-                        <col width="20%">
-                        <col width="20%">
-                        <col width="20%">
-                        <col width="20%">
+                        <col width="25%">
+                        <col width="25%">
+                        <col width="25%">
+                        <col width="25%">
                     </colgroup>
                     <thead>
                         <tr>
-                            <th class="p-4">Image</th>
                             <th class="p-4">Member Name</th>
                             <th class="p-4">Jersey #</th>
                             <th class="p-4">Jersey Size</th>
@@ -109,7 +114,6 @@ if (isset($_SESSION['id'])) {
                         <?php
                         $stmt = $conn->prepare(' SELECT 
                             tbl_orders.id,
-                            tbl_orders.img_url,
                             tbl_orders.name,
                             tbl_orders.jersey_number, 
                             tbl_size.size,
@@ -131,7 +135,6 @@ if (isset($_SESSION['id'])) {
                         while ($rows = $result->fetch_assoc()) {
                             $id = $rows['id'];
                             $shirt_id = $rows['shirt_id'];
-                            $img_url = $rows['img_url'];
                             $name = $rows['name'];
                             $jersey_number = $rows['jersey_number'];
                             $size = $rows['size'];
@@ -140,11 +143,6 @@ if (isset($_SESSION['id'])) {
                             $jersey_type = $rows['jersey_type'];
                             echo '
                                 <tr>
-                                    <td class="p-4">
-                                        <a href="details.php?id=' . $shirt_id . '">
-                                            <img src="IMG/products/' . $img_url . '" alt="' . $img_url . '" width="100" height="100">
-                                        </a>
-                                    </td>
                                     <td class="p-4">' . $name . '</td>
                                     <td class="p-4">' . $jersey_number . '</td>
                                     <td class="p-4">' . $size . '</td>

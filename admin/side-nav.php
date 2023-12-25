@@ -25,13 +25,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="account.php">
+            <a class="nav-link collapsed" href="#">
                 <i class="bi bi-person-circle"></i>
                 <span>Account</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="../logout.php">
+            <a class="nav-link collapsed" href="logout.php">
                 <i class="bi bi-power"></i>
                 <span>Signout</span>
             </a>

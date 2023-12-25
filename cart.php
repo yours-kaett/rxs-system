@@ -47,7 +47,9 @@ if (isset($_SESSION['id'])) {
                             </script>
                             ';
                         } else {
-                            $stmt = $conn->prepare(' SELECT 
+                            $stmt = $conn->prepare(
+                                ' SELECT 
+                            tbl_orders.id,
                             tbl_orders.invoice_number,
                             tbl_orders.img_url,
                             tbl_shirt.shirt_title,
@@ -62,7 +64,8 @@ if (isset($_SESSION['id'])) {
                             INNER JOIN tbl_shirt ON tbl_orders.shirt_id = tbl_shirt.id
                             INNER JOIN tbl_jersey_type ON tbl_orders.jersey_type_id = tbl_jersey_type.id
                             INNER JOIN tbl_transaction_status ON tbl_orders.transaction_status_id = tbl_transaction_status.id
-                            WHERE tbl_orders.client_id = ? GROUP BY tbl_orders.invoice_number ');
+                            WHERE tbl_orders.client_id = ? GROUP BY tbl_orders.invoice_number ORDER BY tbl_orders.id DESC '
+                            );
                             $stmt->bind_param('i', $client_id);
                             $stmt->execute();
                             $result = $stmt->get_result();
@@ -202,13 +205,16 @@ if (isset($_SESSION['id'])) {
                         var price = parseFloat(priceElement.textContent.replace('₱', '').trim());
 
                         sumQuantity += quantity;
-                        sumPayment += quantity * price;
-                        submit.style.visibility = "visible";
+                        sumPayment += +price;
                     });
 
                     totalQuantity.value = sumQuantity;
-                    totalPayment.value = sumPayment; // Assuming totalPayment is a decimal value
+                    totalPayment.value = sumPayment;
+                    if (sumQuantity > 0) {
+                        submit.style.visibility = "visible";
+                    }
                 }
+
             });
         </script>
     </body>

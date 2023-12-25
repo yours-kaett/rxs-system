@@ -53,7 +53,7 @@ if (isset($_SESSION['id'])) {
 
         $stmt->close();
 
-        header("Location: ../details.php?id=$get_id & success");
+        header("Location: ../details.php?id=$get_id&success");
         exit();
     }
 } else {
