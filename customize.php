@@ -99,12 +99,13 @@ if (isset($_SESSION['id'])) {
                                                 <h5>Surname</h5>
                                                 <input type="text" name="name_input" id="name-input" class="form-control">
                                                 <div class="d-flex align-items-center mt-2">
+                                                    <label for="" class="me-3">Back: </label>
                                                     <div class="me-4">
-                                                        <input class="form-check-input" type="radio" name="name_direction" id="name-position-top" value="name-position-top" checked required>
+                                                        <input class="form-check-input" type="radio" name="name_direction" value="position: relative; top: 110px; left: 30px; background-color: transparent; border: none; text-align: center; outline: none; display: flex; color: #fff; z-index: 1;" id="name-position-top" checked required>
                                                         <label class="form-check-label" for="name-position-top" onclick="namePositionTopfn()">Top</label>
                                                     </div>
                                                     <div>
-                                                        <input class="form-check-input" type="radio" name="name_direction" id="name-position-bottom" value="name-position-bottom" required>
+                                                        <input class="form-check-input" type="radio" name="name_direction" value="position: relative; top: 210px; left: 30px; background-color: transparent; border: none; text-align: center; outline: none; display: flex; color: #fff; z-index: 1;" id="name-position-bottom" required>
                                                         <label class="form-check-label" for="name-position-bottom" onclick="namePositionBottomfn()">Bottom</label>
                                                     </div>
                                                 </div>
@@ -114,11 +115,11 @@ if (isset($_SESSION['id'])) {
                                                 <div class="d-flex align-items-center mt-2">
                                                     <label for="" class="me-3">Front: </label>
                                                     <div class="me-4">
-                                                        <input class="form-check-input" type="radio" name="team_name_direction" id="team-name-position-top" value="team-name-position-top" checked required>
+                                                        <input class="form-check-input" type="radio" name="team_name_direction" id="team-name-position-top" value="position: relative; top: 110px; left: 28px; background-color: transparent; border: none; text-align: center; outline: none; display: flex; color: #fff; z-index: 1;" checked required>
                                                         <label class="form-check-label" for="team-name-position-top" onclick="teamnamePositionTopfn()">Top</label>
                                                     </div>
                                                     <div>
-                                                        <input class="form-check-input" type="radio" name="team_name_direction" id="team-name-position-bottom" value="team-name-position-bottom" required>
+                                                        <input class="form-check-input" type="radio" name="team_name_direction" id="team-name-position-bottom" value="position: relative; top: 205px; left: 30px; background-color: transparent; border: none; text-align: center; outline: none; display: flex; color: #fff; z-index: 1;" required>
                                                         <label class="form-check-label" for="team-name-position-bottom" onclick="namePositionBottomfn()">Bottom</label>
                                                     </div>
                                                 </div>
@@ -128,11 +129,11 @@ if (isset($_SESSION['id'])) {
                                                 <div class="d-flex align-items-center mt-2">
                                                     <label for="" class="me-3">Front: </label>
                                                     <div class="me-3">
-                                                        <input class="form-check-input" type="radio" name="number_direction" id="number-position-front-left" value="number-position-front-left" checked required>
+                                                        <input class="form-check-input" type="radio" name="number_direction" id="number-position-front-left" value="position: relative; top: 100px; left: 60px; background-color: transparent; border: none; width: 50px; text-align: center; outline: none; display: flex; color: #fff; z-index: 1;" checked required>
                                                         <label class="form-check-label" for="number-position-front-left" onclick="numberPositionFrontRightfn()">Top Right</label>
                                                     </div>
                                                     <div class="me-3">
-                                                        <input class="form-check-input" type="radio" name="number_direction" id="number-position-front-right" value="number-position-front-right" required>
+                                                        <input class="form-check-input" type="radio" name="number_direction" id="number-position-front-right" value="position: relative; top: 100px; left: 150px; background-color: transparent; border: none; width: 50px; text-align: center; outline: none; display: flex; color: #fff; z-index: 9999;" required>
                                                         <label class="form-check-label" for="number-position-front-right" onclick="numberPositionFrontLeftfn()">Top Left</label>
                                                     </div>
                                                     <div>
@@ -173,7 +174,7 @@ if (isset($_SESSION['id'])) {
                                                         $img_url = $row['img_url'];
                                                         echo '
                                                         <div class="fieldset-pattern me-2 mb-2">
-                                                            <input class="form-check-input" type="radio" name="pattern" id="pattern' . $num . '" value="pattern' . $num . '" style="position: absolute; left: -9999px;" required>
+                                                            <input class="form-check-input" type="radio" name="pattern" id="pattern' . $num . '" value="' . $img_url . '" style="position: absolute; left: -9999px;" required>
                                                             <label class="form-check-label square-radio" for="pattern' . $num . '" onclick="pattern' . $num . 'Fn()">
                                                                 <img src="IMG/patterns/' . $img_url . '" style="width: 70px; height: 70px; cursor: pointer;" alt="">
                                                             </label>
@@ -194,62 +195,26 @@ if (isset($_SESSION['id'])) {
                                                 <hr class="my-3">
                                                 <button class="btn btn-success p-3" type="submit">Save Template</button>
                                                 <a href="my-customize.php">
-                                                    <button class="btn btn-primary p-3 mt-2 w-100" type="button">My Templates</button>
+                                                    <button class="btn btn-primary p-3 mt-2 w-100" type="button">My Template</button>
                                                 </a>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-6 mt-5 pt-5">
                                 <div class="print">
-                                    <div class="mt-4">
-                                        <div class="row">
+                                    <div class="mt-5 pt-5">
+                                        <div class="row mt-5">
                                             <div class="col-lg-6 col-md-6 col-sm-12 relative">
                                                 <h5 style="position: relative;">Front</h5>
                                                 <div style="position: relative;">
-                                                    <input type="number" value="position: relative;
-    top: 100px;
-    left: 60px;
-    background-color: transparent;
-    border: none;
-    width: 50px;
-    text-align: center;
-    outline: none;
-    display: flex;
-    color: #fff;
-    z-index: 1;" id="number-position-front1" readonly />
-                                                    <input type="number" value="position: relative;
-    top: 100px;
-    left: 150px;
-    background-color: transparent;
-    border: none;
-    width: 50px;
-    text-align: center;
-    outline: none;
-    display: none;
-    color: #fff;
-        z-index: 9999;" id="number-position-front2" readonly />
-                                                    <input type="text" value="position: relative;
-    top: 110px;
-    left: 28px;
-    background-color: transparent;
-    border: none;
-    text-align: center;
-    outline: none;
-    display: flex;
-    color: #fff;
-    z-index: 1;" id="team-name-position-front1" readonly />
-                                                    <input type="text" value="position: relative;
-    top: 205px;
-    left: 30px;
-    background-color: transparent;
-    border: none;
-    text-align: center;
-    outline: none;
-    display: none;
-    color: #fff;
-    z-index: 1;" id="team-name-position-front2" readonly />
+                                                    <!-- background-color: #f6f9ff; -->
+                                                    <!-- <div class="p-5" style="transform: rotate(60deg); background-color: #f6f9ff; right: 8px; top: 70px; z-index: 1000; border-radius: 45%; position: absolute;"></div> -->
+                                                    <input type="number" id="number-position-front1" readonly />
+                                                    <input type="number" id="number-position-front2" readonly />
+                                                    <input type="text" id="team-name-position-front1" style="visibility: hidden;" readonly />
+                                                    <input type="text" id="team-name-position-front2" style="visibility: hidden;" readonly />
                                                     <i class="bx bxs-t-shirt shirts" id="front" style="color: #007BFF; position: relative;"></i>
                                                     <?php
                                                     $stmt = $conn->prepare(' SELECT * FROM tbl_logos ORDER BY id ASC');
@@ -283,44 +248,18 @@ if (isset($_SESSION['id'])) {
                                                         ';
                                                     }
                                                     ?>
+                                                    <!-- <span class="p-5 w-50" style="transform: rotateY(60deg); background-color: #f6f9ff; right: 40px; bottom: 0px; z-index: 1000; border-radius: 45%; position: relative;"></span> -->
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12 relative">
                                                 <h5 style="position: relative;">Back</h5>
                                                 <div style="position: relative;">
-                                                    <input type="text" value="position: relative;
-    top: 110px;
-        left: 30px;
-    background-color: transparent;
-    border: none;
-    text-align: center;
-    outline: none;
-    display: flex;
-    color: #fff;
-    z-index: 1;" id="name-position-back1" readonly>
-                                                    <input type="text" value="position: relative;
-    top: 210px;
-    left: 30px;
-    background-color: transparent;
-    border: none;
-    text-align: center;
-    outline: none;
-    display: none;
-    color: #fff;
-    z-index: 1;" id="name-position-back2" readonly>
+                                                    <!-- <div class="p-5" style="transform: rotate(60deg); background-color: #f6f9ff; right: 190px; top: 70px; z-index: 1000; border-radius: 45%; position: absolute;"></div> -->
+                                                    <!-- <div class="p-5" style="transform: rotate(60deg); background-color: #f6f9ff; right: 8px; top: 70px; z-index: 1000; border-radius: 45%; position: absolute;"></div> -->
+                                                    <input type="text" id="name-position-back1" style="visibility: hidden;" readonly>
+                                                    <input type="text" id="name-position-back2" style="visibility: hidden;" readonly>
                                                     <i class="bx bxs-t-shirt shirts mt-4" id="back" style="color: #007BFF; position: relative;"></i>
-                                                    <input type="number" value="position: relative;
-    bottom: 160px;
-    left: 68px;
-    background-color: transparent;
-    font-size: 60px;
-    border: none;
-    width: 120px;
-    text-align: center;
-    outline: none;
-        display: flex;
-        color: #fff;
-        z-index: 1;" id="number-position-back" readonly>
+                                                    <input type="number" id="number-position-back" readonly>
                                                     <?php
                                                     $stmt = $conn->prepare(' SELECT * FROM tbl_patterns ORDER BY id ASC');
                                                     $stmt->execute();
@@ -406,15 +345,21 @@ if (isset($_SESSION['id'])) {
                 }
 
                 function updateNamePosition(newName) {
+                    namePositionBack1.style.visibility = "visible";
                     namePositionBack1.value = newName;
                     namePositionBack1.textContent = newName;
+
+                    namePositionBack2.style.visibility = "visible";
                     namePositionBack2.value = newName;
                     namePositionBack2.textContent = newName;
                 }
 
                 function updateTeamNamePosition(newTeamName) {
+                    namePositionFront1.style.visibility = "visible";
                     namePositionFront1.value = newTeamName;
                     namePositionFront1.textContent = newTeamName;
+
+                    namePositionFront2.style.visibility = "visible";
                     namePositionFront2.value = newTeamName;
                     namePositionFront2.textContent = newTeamName;
                 }

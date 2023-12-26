@@ -9,17 +9,6 @@ if (isset($_SESSION['id'])) {
     $stmt->bind_param('i', $client_id);
     $stmt->execute();
     $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $bg_color = $row['bg_color'];
-    $name_input = $row['name_input'];
-    $name_direction = $row['name_direction'];
-    $team_name_input = $row['team_name_input'];
-    $team_name_direction = $row['team_name_direction'];
-    $number_input = $row['number_input'];
-    $number_direction = $row['number_direction'];
-    $logo = $row['logo'];
-    $pattern = $row['pattern'];
-    $font = $row['font'];
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -62,41 +51,55 @@ if (isset($_SESSION['id'])) {
                         <div class="">
                             <div class="print">
                                 <div class="mt-4">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-sm-4 relative">
-                                            <h5 style="position: relative;">Front</h5>
-                                            <div style="position: relative;">
-                                                <input type="number" value="<?php echo $number_input ?>" style="font-family: <?php echo $font ?>" id="number-position-front1" readonly />
-                                                <input type="number" value="<?php echo $number_input ?>" style="font-family: <?php echo $font ?>" id="number-position-front2" readonly />
-                                                <input type="text" value="<?php echo $team_name_input ?>" style="font-family: <?php echo $font ?>" id="team-name-position-front1" readonly />
-                                                <input type="text" value="<?php echo $team_name_input ?>" style="font-family: <?php echo $font ?>" id="team-name-position-front2" readonly />
-                                                <i class="bx bxs-t-shirt shirts" style="color: <?php echo $bg_color; ?>; position: relative;"></i>
-                                                <img src="IMG/logos/<?php echo $logo; ?>" style="position: relative; 
-                                                            right: 170px; bottom: 85px; width: 80px; 
-                                                            z-index: 1000; border-radius: 50%;" alt="">
-                                                <img src="IMG/patterns/<?php echo $pattern; ?>" style="position: relative; 
-                                                            left: 5px; bottom: 310px; width: 240px; 
-                                                            height: 300px; z-index: 1000; 
-                                                            mix-blend-mode: overlay; opacity: 30%;" alt="">
+                                    <?php
+                                    while ($row = $result->fetch_assoc()) {
+                                        $bg_color = $row['bg_color'];
+                                        $name_input = $row['name_input'];
+                                        $name_direction = $row['name_direction'];
+                                        $team_name_input = $row['team_name_input'];
+                                        $team_name_direction = $row['team_name_direction'];
+                                        $number_input = $row['number_input'];
+                                        $number_direction = $row['number_direction'];
+                                        $logo = $row['logo'];
+                                        $pattern = $row['pattern'];
+                                        $font = $row['font'];
+                                        echo '
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-sm-4 relative">
+                                                <h5 style="position: relative;">Front</h5>
+                                                <div style="position: relative;">
+                                                    <input type="number" value="' . $number_input . '" style="font-family: ' . $font . '; ' . $number_direction . '" readonly />
+                                                    <input type="text" value="' . $team_name_input . '" style="font-family: ' . $font . '; ' . $team_name_direction . '" readonly />
+                                                    <i class="bx bxs-t-shirt shirts" style="color: ' . $bg_color . '; position: relative;"></i>
+                                                    <img src="IMG/logos/' . $logo . '" style="position: relative; 
+                                                                right: 170px; bottom: 85px; width: 80px; 
+                                                                z-index: 1000; border-radius: 50%;" alt="">
+                                                    <img id="pattern1" src="IMG/patterns/' . $pattern . '" style="position: relative; 
+                                                                left: 5px; bottom: 310px; width: 240px; 
+                                                                height: 300px; z-index: 1000; 
+                                                                mix-blend-mode: overlay; opacity: 30%;" alt="">
 
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4 relative">
+                                                <h5 style="position: relative;">Back</h5>
+                                                <div style="position: relative;">
+                                                    <input type="text" value="' . $name_input . '" style="font-family: ' . $font . '; ' . $name_direction . '" readonly>
+                                                    <i class="bx bxs-t-shirt shirts mt-4" id="back" style="color: ' . $bg_color . '; position: relative;"></i>
+                                                    <input type="number" value="' . $number_input . '" style="font-family: ' . $font . ';" id="number-position-back" readonly>
+                                                    <img id="pattern2" src="IMG/patterns/' . $pattern . '" style="position: relative; left: 5px; 
+                                                            bottom: 320px; width: 240px; z-index: 1000; 
+                                                            mix-blend-mode: overlay; opacity: 30%;" alt="">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 relative">
-                                            <h5 style="position: relative;">Back</h5>
-                                            <div style="position: relative;">
-                                                <input type="text" value="<?php echo $name_input; ?>" style="font-family: <?php echo $font ?>" id="name-position-back1" readonly>
-                                                <input type="text" value="<?php echo $name_input; ?>" style="font-family: <?php echo $font ?>" id="name-position-back2" readonly>
-                                                <i class="bx bxs-t-shirt shirts mt-4" id="back" style="color: <?php echo $bg_color; ?>; position: relative;"></i>
-                                                <input type="number" value="<?php echo $number_input; ?>" style="font-family: <?php echo $font ?>" id="number-position-back" readonly>
-                                                <img src="IMG/patterns/<?php echo $pattern; ?>.png" style="position: relative; left: 5px; 
-                                                        bottom: 320px; width: 240px; z-index: 1000; 
-                                                        mix-blend-mode: overlay; opacity: 30%;" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
+                                        ';
+                                    }
+                                    ?>
+
                                 </div>
                             </div>
-                            <!-- <button onclick="printCustomizedShirt()" class="btn btn-success btn-lg" type="button">Print this template</button> -->
+                            <!-- <button onclick="PrintPage()" class="btn btn-success btn-lg" type="button">Print this template</button> -->
                         </div>
                     </div>
                 </div>
@@ -120,6 +123,10 @@ if (isset($_SESSION['id'])) {
             // }
 
             // function PrintPage() {
+            //     document.getElementById("pattern1").style.zIndex = "1000";
+            //     document.getElementById("pattern2").style.zIndex = "1000";
+            //     document.getElementById("pattern1").style.mixBlendMode = "overlay";
+            //     document.getElementById("pattern2").style.mixBlendMode = "overlay";
             //     window.print();
             //     setTimeout(function() {
             //         window.close()
