@@ -36,9 +36,9 @@ if (isset($_SESSION['id'])) {
                         </ol>
                     </nav>
                 </div>
-                <a href="#" class="btn btn-primary rounded-0">
+                <button class="btn btn-primary rounded-0" type="button" data-bs-toggle="modal" data-bs-target="#addmodal">
                     <i class="bi bi-plus-lg"></i>&nbsp; Add Product
-                </a>
+                </button>
             </div>
 
             <section class="section dashboard">
@@ -54,7 +54,6 @@ if (isset($_SESSION['id'])) {
                                         <col width="5%">
                                         <col width="8%">
                                         <col width="10%">
-                                        <col width="5%">
                                         <thead>
                                             <tr>
                                                 <th>Image</th>
@@ -63,7 +62,6 @@ if (isset($_SESSION['id'])) {
                                                 <th>Price</th>
                                                 <th>Category</th>
                                                 <th>Jersey Type</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -98,13 +96,6 @@ if (isset($_SESSION['id'])) {
                                             <td>' . $shirt_price . '</td>
                                             <td>' . $shirt_category . '</td>
                                             <td>' . $jersey_type . '</td>
-                                            <td>
-                                                <a href="shirt-details.php?id=' . $id . '">
-                                                    <button class="btn btn-primary" type="button">
-                                                        <i class="bi bi-eye"></i>&nbsp; View
-                                                    </button>
-                                                </a>
-                                            </td>
                                         </tr>
                                         ';
                                             }
@@ -116,10 +107,82 @@ if (isset($_SESSION['id'])) {
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="addmodal" tabindex="-1" aria-labelledby="addmodalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content p-3">
+                            <form action="checking/add-product-check.php" method="post" enctype="multipart/form-data" class="row">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="addmodalLabel">Add Product Display</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-12 mb-2">
+                                        <label for="shirt_title">Shirt Title</label>
+                                        <input type="text" name="shirt_title" class="form-control" id="shirt_title" required />
+                                    </div>
+                                    <div class="col-12 mb-2">
+                                        <label for="shirt_code">Shirt Code</label>
+                                        <input type="text" name="shirt_code" class="form-control" id="shirt_code" required />
+                                    </div>
+                                    <div class="col-12 mb-2">
+                                        <label for="shirt_price">Shirt Price</label>
+                                        <input type="number" name="shirt_price" class="form-control" id="shirt_price" required />
+                                    </div>
+                                    <div class="col-12 mb-2">
+                                        <label for="img_url">Image</label>
+                                        <input type="file" name="img_url" class="form-control" id="img_url" required />
+                                    </div>
+                                    <div class="col-12 mb-2">
+                                        <label for="schirt_category_id">Shirt Category</label>
+                                        <select name="schirt_category_id" id="schirt_category_id" class="form-select">
+                                            <option disabled selected>-select-</option>
+                                            <?php
+                                            $stmt = $conn->prepare('SELECT * FROM tbl_shirt_category');
+                                            $stmt->execute();
+                                            $result = $stmt->get_result();
+                                            while ($row = $result->fetch_assoc()) {
+                                                $id = $row['id'];
+                                                $shirt_category = $row['shirt_category'];
+                                                echo "<option value='$id'>$shirt_category</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 mb-2">
+                                        <label for="jersey_type_id">Jersey Type</label>
+                                        <select name="jersey_type_id" id="jersey_type_id" class="form-select">
+                                            <option disabled selected>-select-</option>
+                                            <?php
+                                            $stmt = $conn->prepare('SELECT * FROM tbl_jersey_type');
+                                            $stmt->execute();
+                                            $result = $stmt->get_result();
+                                            while ($row = $result->fetch_assoc()) {
+                                                $id = $row['id'];
+                                                $jersey_type = $row['jersey_type'];
+                                                echo "<option value='$id'>$jersey_type</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success" id="loaderButton">
+                                        <span id="submitBlank">
+                                            <span id="submit">Save</span>
+                                        </span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
             </section>
 
         </main>
+
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
         <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="assets/js/main.js"></script>

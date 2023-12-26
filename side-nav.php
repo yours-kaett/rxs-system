@@ -7,21 +7,15 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="shop.php">
-                <i class="bi bi-basket"></i>
-                <span>Shop</span>
+            <a class="nav-link collapsed" href="customize.php">
+                <i class="bi bi-columns-gap"></i>
+                <span>Customize</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="cart.php">
-                <i class="bi bi-cart"></i>
-                <span>Cart</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="cart.php">
-                <i class="bi bi-telephone"></i>
-                <span>Contact</span>
+            <a class="nav-link collapsed" href="my-customize.php">
+                <i class="bi bi-columns"></i>
+                <span>My Customize</span>
             </a>
         </li>
         <li class="nav-item">

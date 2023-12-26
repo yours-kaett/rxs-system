@@ -36,7 +36,7 @@ if (isset($_SESSION['id'])) {
         <?php include 'top-nav.php' ?>
         <?php include 'side-nav.php' ?>
         <main id="main" class="main">
-            <div class="pagetitle">
+            <!-- <div class="pagetitle">
                 <h1>My Customize Templates</h1>
                 <nav>
                     <ol class="breadcrumb">
@@ -44,13 +44,13 @@ if (isset($_SESSION['id'])) {
                         <li class="breadcrumb-item active">My Customize Templates</li>
                     </ol>
                 </nav>
-            </div>
+            </div> -->
             <section class="section dashboard">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="">
                             <div class="print">
-                                <div class="mt-4">
+                                <div class="mt-5 pt-5">
                                     <?php
                                     while ($row = $result->fetch_assoc()) {
                                         $bg_color = $row['bg_color'];
@@ -73,7 +73,7 @@ if (isset($_SESSION['id'])) {
                                                     <i class="bx bxs-t-shirt shirts" style="color: ' . $bg_color . '; position: relative;"></i>
                                                     <img src="IMG/logos/' . $logo . '" style="position: relative; 
                                                                 right: 170px; bottom: 85px; width: 80px; 
-                                                                z-index: 1000; border-radius: 50%;" alt="">
+                                                                z-index: 1; border-radius: 50%;" alt="">
                                                     <img id="pattern1" src="IMG/patterns/' . $pattern . '" style="position: relative; 
                                                                 left: 5px; bottom: 310px; width: 240px; 
                                                                 height: 300px; z-index: 1000; 

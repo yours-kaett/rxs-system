@@ -194,9 +194,6 @@ if (isset($_SESSION['id'])) {
                                                 </select>
                                                 <hr class="my-3">
                                                 <button class="btn btn-success p-3" type="submit">Save Template</button>
-                                                <a href="my-customize.php">
-                                                    <button class="btn btn-primary p-3 mt-2 w-100" type="button">My Template</button>
-                                                </a>
                                             </div>
                                         </form>
                                     </div>
