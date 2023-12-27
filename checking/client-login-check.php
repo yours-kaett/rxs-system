@@ -29,7 +29,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['username'] = $row['username'];
 
-                header("Location: ../shop.php");
+                header("Location: ../index.php");
                 exit();
             } else {
                 header("Location: ../client-login.php?invalid");
