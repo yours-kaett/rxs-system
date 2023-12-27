@@ -92,7 +92,7 @@ if (isset($_SESSION['id'])) {
                                 if ($transaction_status === "On-progress") {
                                     $indicatorColor = '#ffae00';
                                 }
-                                if ($transaction_status === "Ordered") {
+                                if ($transaction_status === "Delivered") {
                                     $indicatorColor = '#109d00';
                                 }
                                 echo '

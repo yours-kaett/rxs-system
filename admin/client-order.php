@@ -3,7 +3,7 @@ include '../database_connection.php';
 session_start();
 if (isset($_SESSION['id'])) {
     $admin_id = $_SESSION['id'];
-    $invoice_number = $_GET['invoice_number'];
+    $invoice = $_GET['invoice_number'];
     $stmt = $conn->prepare('SELECT
     tbl_orders.img_url,
     tbl_shirt.shirt_title,
@@ -22,7 +22,7 @@ if (isset($_SESSION['id'])) {
     INNER JOIN tbl_jersey_type ON tbl_orders.jersey_type_id = tbl_jersey_type.id
     INNER JOIN tbl_transaction_status ON tbl_orders.transaction_status_id = tbl_transaction_status.id
     WHERE tbl_orders.invoice_number = ?');
-    $stmt->bind_param('s', $invoice_number);
+    $stmt->bind_param('s', $invoice);
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
@@ -108,18 +108,29 @@ if (isset($_SESSION['id'])) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <tbody>
                                             <?php
-                                            while ($order_row = $result->fetch_assoc()) {
-                                                $name = $order_row['name'];
-                                                $jersey_number = $order_row['jersey_number'];
-                                                $size = $order_row['size'];
+                                            $stmt = $conn->prepare(' SELECT 
+                                            tbl_orders.name,
+                                            tbl_orders.jersey_number, 
+                                            tbl_orders.size_id, 
+                                            tbl_size.size,
+                                            tbl_orders.invoice_number
+                                            FROM tbl_orders 
+                                            INNER JOIN tbl_size ON tbl_orders.size_id = tbl_size.id
+                                            WHERE tbl_orders.invoice_number = ? ');
+                                            $stmt->bind_param('s', $invoice);
+                                            $stmt->execute();
+                                            $result = $stmt->get_result();
+                                            while ($row = $result->fetch_assoc()) {
+                                                $name = $row['name'];
+                                                $jersey_number = $row['jersey_number'];
+                                                $size = $row['size'];
                                                 echo '
-                                            <tr>
-                                                <td>' . $name . '</td>
-                                                <td>' . $jersey_number . '</td>
-                                                <td>' . $size . '</td>
-                                            </tr>
+                                                <tr>
+                                                    <td>' . $name . '</td>
+                                                    <td>' . $jersey_number . '</td>
+                                                    <td>' . $size . '</td>
+                                                </tr>
                                             ';
                                             }
                                             ?>
