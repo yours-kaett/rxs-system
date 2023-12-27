@@ -40,18 +40,22 @@ if (isset($_SESSION['id'])) {
                             $img_url = $row['img_url'];
                             if ($transaction_status === "On-cart") {
                                 $visibility = 'hidden';
+                                $btn_visibility = 'visible';
                             }
                             if ($transaction_status === "Pending") {
                                 $indicatorColor = '#ff0000';
                                 $visibility = 'visible';
+                                $btn_visibility = 'visible';
                             }
                             if ($transaction_status === "On-progress") {
                                 $indicatorColor = '#ffae00';
                                 $visibility = 'hidden';
+                                $btn_visibility = 'hidden';
                             }
                             if ($transaction_status === "Delivered") {
                                 $indicatorColor = '#109d00';
                                 $visibility = 'hidden';
+                                $btn_visibility = 'hidden';
                             }
                             echo "
                                 <a href='details.php?id=$shirt_id'>
@@ -116,6 +120,7 @@ if (isset($_SESSION['id'])) {
                             tbl_orders.id,
                             tbl_orders.name,
                             tbl_orders.jersey_number, 
+                            tbl_orders.size_id, 
                             tbl_size.size,
                             tbl_orders.shirt_id,
                             tbl_orders.invoice_number,
@@ -138,6 +143,7 @@ if (isset($_SESSION['id'])) {
                             $name = $rows['name'];
                             $jersey_number = $rows['jersey_number'];
                             $size = $rows['size'];
+                            $size_id = $rows['size_id'];
                             $transaction_status = $rows['transaction_status'];
                             $shirt_title = $rows['shirt_title'];
                             $jersey_type = $rows['jersey_type'];
@@ -147,18 +153,30 @@ if (isset($_SESSION['id'])) {
                                     <td class="p-4">' . $jersey_number . '</td>
                                     <td class="p-4">' . $size . '</td>
                                     <td class="p-4">
-                                        <a href="edit-cart-details.php?id=' . $id . '" >
-                                            <button class="btn btn-success p-2">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </button>
-                                        </a>
-                                        <a href="checking/remove-order.php?id=' . $id . '">
-                                            <button class="btn btn-danger p-2" title="Cancel">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </a>
+                                        <button class="btn btn-danger p-2" title="Remove" style="visibility: '.$btn_visibility.';" id="btn-remove" data-bs-toggle="modal" data-bs-target="#deleteModal' . $id . '">
+                                            <i class="bi bi-trash"></i>&nbsp; Remove
+                                        </button>
                                     </td>
-                                </tr>';
+                                </tr>
+                                <div class="modal fade" id="deleteModal' . $id . '" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content p-1">
+                                            <form action="checking/remove-member-check.php?id=' . $id . '" method="post" class="row p-2 needs-validation" novalidate>
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="deleteModalLabel">Remove Member</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to remove ' . $name . '?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-primary" id="loaderButton">Yes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>';
                         }
 
                         ?>

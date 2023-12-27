@@ -16,7 +16,7 @@ if (isset($_SESSION['id'])) {
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <title>RXS - Admin Dashboard</title>
+        <title>Web-based Customized Apparel Design and Ordering System</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
         <link href="assets/img/logo.png" rel="icon">

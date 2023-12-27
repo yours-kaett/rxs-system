@@ -12,7 +12,7 @@ if (isset($_SESSION['id'])) {
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <title>RXS - Admin Dashboard</title>
+        <title>Web-based Customized Apparel Design and Ordering System</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
         <link href="assets/img/logo.png" rel="icon">
@@ -206,13 +206,14 @@ if (isset($_SESSION['id'])) {
                                             <div class="col-lg-6 col-md-6 col-sm-12 relative">
                                                 <h5 style="position: relative;">Front</h5>
                                                 <div style="position: relative;">
-                                                    <!-- background-color: #f6f9ff; -->
-                                                    <!-- <div class="p-5" style="transform: rotate(60deg); background-color: #f6f9ff; right: 8px; top: 70px; z-index: 1000; border-radius: 45%; position: absolute;"></div> -->
                                                     <input type="number" id="number-position-front1" readonly />
                                                     <input type="number" id="number-position-front2" readonly />
                                                     <input type="text" id="team-name-position-front1" style="visibility: hidden;" readonly />
                                                     <input type="text" id="team-name-position-front2" style="visibility: hidden;" readonly />
                                                     <i class="bx bxs-t-shirt shirts" id="front" style="color: #007BFF; position: relative;"></i>
+                                                    <!-- <i style="position: relative;"> -->
+                                                        <!-- <img src="IMG/model-front.png" id="front" style="mix-blend-mode: color-burn; position: relative;"> -->
+                                                    <!-- </i> -->
                                                     <?php
                                                     $stmt = $conn->prepare(' SELECT * FROM tbl_logos ORDER BY id ASC');
                                                     $stmt->execute();
@@ -324,6 +325,7 @@ if (isset($_SESSION['id'])) {
 
                 function updateIconsColor(color) {
                     if (color === '#007bff') {
+                        frontIcon.querySelector('img').style.backgroundColor = selectedColor;
                         frontIcon.style.color = '#007bff';
                         backIcon.style.color = '#007bff';
                     } else if (color === '#6c757d') {
