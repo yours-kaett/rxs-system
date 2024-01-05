@@ -211,9 +211,6 @@ if (isset($_SESSION['id'])) {
                                                     <input type="text" id="team-name-position-front1" style="visibility: hidden;" readonly />
                                                     <input type="text" id="team-name-position-front2" style="visibility: hidden;" readonly />
                                                     <i class="bx bxs-t-shirt shirts" id="front" style="color: #007BFF; position: relative;"></i>
-                                                    <!-- <i style="position: relative;"> -->
-                                                        <!-- <img src="IMG/model-front.png" id="front" style="mix-blend-mode: color-burn; position: relative;"> -->
-                                                    <!-- </i> -->
                                                     <?php
                                                     $stmt = $conn->prepare(' SELECT * FROM tbl_logos ORDER BY id ASC');
                                                     $stmt->execute();
@@ -226,7 +223,7 @@ if (isset($_SESSION['id'])) {
                                                             id="IMG/logos/' . $img_url . '_logo" 
                                                             style="display: none; position: relative; 
                                                             left: 85px; bottom: 145px; width: 80px; 
-                                                            z-index: 1000; border-radius: 50%;" alt="">
+                                                            border-radius: 50%;" alt="">
                                                         ';
                                                     }
 
@@ -240,9 +237,8 @@ if (isset($_SESSION['id'])) {
                                                             <img src="IMG/patterns/' . $img_url . '" 
                                                             id="f_pattern' . $num . '" 
                                                             style="display: none; position: relative; 
-                                                            left: 5px; bottom: 310px; width: 240px; 
-                                                            height: 300px; z-index: 1000; 
-                                                            mix-blend-mode: overlay; opacity: 30%;" alt="">
+                                                            left: 5px; bottom: 320px; width: 240px; 
+                                                            height: 300px; mix-blend-mode: overlay; opacity: 30%;" alt="">
                                                         ';
                                                     }
                                                     ?>
@@ -266,10 +262,11 @@ if (isset($_SESSION['id'])) {
                                                         $num = $row['id'];
                                                         $img_url = $row['img_url'];
                                                         echo '
-                                                        <img src="IMG/patterns/' . $img_url . '" id="b_pattern' . $num . '" 
-                                                        style="display: none; position: relative; left: 5px; 
-                                                        bottom: 320px; width: 240px; z-index: 1000; 
-                                                        mix-blend-mode: overlay; opacity: 30%;" alt="">
+                                                            <img src="IMG/patterns/' . $img_url . '" 
+                                                            id="b_pattern' . $num . '" 
+                                                            style="display: none; position: relative; 
+                                                            left: 5px; bottom: 332px; width: 240px; 
+                                                            height: 300px; mix-blend-mode: overlay; opacity: 30%;" alt="">
                                                         ';
                                                     }
                                                     ?>
@@ -278,7 +275,6 @@ if (isset($_SESSION['id'])) {
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <button onclick="PrintPage()" class="btn btn-success btn-lg" type="button">Export Cusomized Shirt</button> -->
                             </div>
                         </div>
                     </div>
@@ -486,26 +482,6 @@ if (isset($_SESSION['id'])) {
                 var selectedFont = $(this).val();
                 $('#number-position-front1, #number-position-front2, #team-name-position-front1, #team-name-position-front2, #name-position-back1, #name-position-back2, #number-position-back').css('font-family', selectedFont);
             });
-        </script>
-        <script>
-            // function printCustomizedShirt() {
-            //     html2canvas(document.querySelector('.print')).then(canvas => {
-            //         var imageData = canvas.toDataURL("image/png");
-            //         var printWindow = window.open();
-            //         printWindow.document.write('<img src="' + imageData + '" alt="Customized Shirt">');
-            //         var downloadLink = document.createElement('a');
-            //         downloadLink.href = imageData;
-            //         downloadLink.download = 'customized_shirt.png';
-            //         downloadLink.click();
-            //     });
-            // }
-
-            // function PrintPage() {
-            //     window.print();
-            //     setTimeout(function() {
-            //         window.close()
-            //     }, 900);
-            // }
         </script>
     </body>
 

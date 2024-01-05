@@ -1,8 +1,6 @@
 <?php
 include 'database_connection.php';
 session_start();
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
 if (isset($_SESSION['id'])) {
     $client_id = $_SESSION['id'];
     $stmt = $conn->prepare('SELECT * FROM tbl_customize WHERE client_id = ?');
@@ -36,15 +34,6 @@ if (isset($_SESSION['id'])) {
         <?php include 'top-nav.php' ?>
         <?php include 'side-nav.php' ?>
         <main id="main" class="main">
-            <!-- <div class="pagetitle">
-                <h1>My Customize Templates</h1>
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">Menu</li>
-                        <li class="breadcrumb-item active">My Customize Templates</li>
-                    </ol>
-                </nav>
-            </div> -->
             <section class="section dashboard">
                 <div class="row">
                     <div class="col-lg-12">
@@ -53,6 +42,7 @@ if (isset($_SESSION['id'])) {
                                 <div class="mt-5 pt-5">
                                     <?php
                                     while ($row = $result->fetch_assoc()) {
+                                        $id = $row['id'];
                                         $bg_color = $row['bg_color'];
                                         $name_input = $row['name_input'];
                                         $name_direction = $row['name_direction'];
@@ -65,31 +55,41 @@ if (isset($_SESSION['id'])) {
                                         $font = $row['font'];
                                         echo '
                                         <div class="row">
+                                            <div class="col-12 py-4">
+                                                <a href="checking/order-customize.php?id=' . $id . '">
+                                                    <button class="btn btn-success" type="button">
+                                                        <i class="bi bi-basket"></i>&nbsp; Order
+                                                    </button>
+                                                </a>
+                                                <a href="checking/remove-customize.php?id=' . $id . '">
+                                                    <button class="btn btn-danger">
+                                                        <i class="bi bi-trash"></i>&nbsp; Remove
+                                                    </button>
+                                                </a>
+                                            </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 relative">
                                                 <h5 style="position: relative;">Front</h5>
                                                 <div style="position: relative;">
-                                                    <input type="number" value="' . $number_input . '" style="font-family: ' . $font . '; ' . $number_direction . '" readonly />
-                                                    <input type="text" value="' . $team_name_input . '" style="font-family: ' . $font . '; ' . $team_name_direction . '" readonly />
+                                                    <input type="number" value="' . $number_input . '" style="font-family: ' . $font . '; ' . $number_direction . '" />
+                                                    <input type="text" value="' . $team_name_input . '" style="background: transparent; font-size: 15px; font-family: ' . $font . '; ' . $team_name_direction . '" />
                                                     <i class="bx bxs-t-shirt shirts" style="color: ' . $bg_color . '; position: relative;"></i>
                                                     <img src="IMG/logos/' . $logo . '" style="position: relative; 
                                                                 right: 170px; bottom: 85px; width: 80px; 
                                                                 z-index: 1; border-radius: 50%;" alt="">
                                                     <img id="pattern1" src="IMG/patterns/' . $pattern . '" style="position: relative; 
-                                                                left: 5px; bottom: 310px; width: 240px; 
-                                                                height: 300px; z-index: 1000; 
-                                                                mix-blend-mode: overlay; opacity: 30%;" alt="">
-
+                                                                left: 5px; bottom: 260px; width: 240px; 
+                                                                height: 300px; mix-blend-mode: overlay; opacity: 30%;" alt="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 relative">
                                                 <h5 style="position: relative;">Back</h5>
                                                 <div style="position: relative;">
-                                                    <input type="text" value="' . $name_input . '" style="font-family: ' . $font . '; ' . $name_direction . '" readonly>
+                                                    <input type="text" value="' . $name_input . '" style="font-size: 15px; font-family: ' . $font . '; ' . $name_direction . '">
                                                     <i class="bx bxs-t-shirt shirts mt-4" id="back" style="color: ' . $bg_color . '; position: relative;"></i>
-                                                    <input type="number" value="' . $number_input . '" style="font-family: ' . $font . ';" id="number-position-back" readonly>
-                                                    <img id="pattern2" src="IMG/patterns/' . $pattern . '" style="position: relative; left: 5px; 
-                                                            bottom: 320px; width: 240px; z-index: 1000; 
-                                                            mix-blend-mode: overlay; opacity: 30%;" alt="">
+                                                    <input type="text" value="' . $number_input . '" style="font-family: ' . $font . ';" id="number-position-back">
+                                                    <img id="pattern2" src="IMG/patterns/' . $pattern . '" style=" position: relative; 
+                                                                left: 5px; bottom: 332px; width: 240px; 
+                                                                height: 300px; mix-blend-mode: overlay; opacity: 30%;" alt="">
                                                 </div>
                                             </div>
                                         </div>
@@ -109,29 +109,32 @@ if (isset($_SESSION['id'])) {
 
         <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="assets/js/main.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
         <script>
-            // function printCustomizedShirt() {
-            //     html2canvas(document.querySelector('.print')).then(canvas => {
-            //         var imageData = canvas.toDataURL("image/png");
-            //         var printWindow = window.open();
-            //         printWindow.document.write('<img src="' + imageData + '" alt="Customized Shirt">');
-            //         var downloadLink = document.createElement('a');
-            //         downloadLink.href = imageData;
-            //         downloadLink.download = 'customized_shirt.png';
-            //         downloadLink.click();
-            //     });
-            // }
+            function captureScreenshot() {
+    // Send a request to the server to generate the document file
+    fetch('generateDocument.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ content: document.documentElement.outerHTML }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response from the server (e.g., provide a download link)
+        var link = document.createElement('a');
+        link.href = data.fileUrl;
+        link.download = 'document.docx';
+        link.click();
+    });
+}
 
-            // function PrintPage() {
-            //     document.getElementById("pattern1").style.zIndex = "1000";
-            //     document.getElementById("pattern2").style.zIndex = "1000";
-            //     document.getElementById("pattern1").style.mixBlendMode = "overlay";
-            //     document.getElementById("pattern2").style.mixBlendMode = "overlay";
-            //     window.print();
-            //     setTimeout(function() {
-            //         window.close()
-            //     }, 900);
-            // }
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'p' || event.key === 'P') {
+        captureScreenshot();
+    }
+});
         </script>
     </body>
 

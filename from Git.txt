@@ -1,0 +1,5 @@
+composer require phpoffice/phpword
+npm install html-to-docx
+npm install -g html-to-docx@latest
+npm install mammoth
+composer require mammothphp/mammoth
