@@ -4,8 +4,6 @@ session_start();
 if (isset($_SESSION['id'])) {
     $client_id = $_SESSION['id'];
 ?>
-    <!DOCTYPE html>
-    <html lang="en">
     <?php include 'includes/head.php' ?>
 
     <body>
@@ -96,7 +94,7 @@ if (isset($_SESSION['id'])) {
                                     $indicatorColor = '#109d00';
                                 }
                                 echo '
-                                        <div class="row cart-bg rounded p-3 mb-3">
+                                        <div class="row rounded border p-3 mb-3">
                                             <div class="col-lg-1 col-md-1 col-sm-1 mt-2 d-flex align-items-center">
                                                 <input type="checkbox" name="invoice_number[' . $invoice_number . ']" value="' . $invoice_number . '" id="select' . $invoice_number . '" class="form-check-input border" style="cursor: pointer;" />
                                             </div>

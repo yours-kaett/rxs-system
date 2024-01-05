@@ -15,7 +15,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="my-customize.php">
                 <i class="bi bi-columns"></i>
-                <span>My Customize</span>
+                <span>My Saved Designs</span>
             </a>
         </li>
         <li class="nav-item">

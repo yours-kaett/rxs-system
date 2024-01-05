@@ -5,8 +5,6 @@ if (isset($_SESSION['id'])) {
     $client_id = $_SESSION['id'];
     $get_invoice = $_GET['invoice'];
 ?>
-    <!DOCTYPE html>
-    <html lang="en">
     <?php include 'includes/head.php' ?>
 
     <body>
@@ -153,7 +151,7 @@ if (isset($_SESSION['id'])) {
                                     <td class="p-4">' . $jersey_number . '</td>
                                     <td class="p-4">' . $size . '</td>
                                     <td class="p-4">
-                                        <button class="btn btn-danger p-2" title="Remove" style="visibility: '.$btn_visibility.';" id="btn-remove" data-bs-toggle="modal" data-bs-target="#deleteModal' . $id . '">
+                                        <button class="btn btn-danger p-2" title="Remove" style="visibility: ' . $btn_visibility . ';" id="btn-remove" data-bs-toggle="modal" data-bs-target="#deleteModal' . $id . '">
                                             <i class="bi bi-trash"></i>&nbsp; Remove
                                         </button>
                                     </td>
@@ -187,7 +185,6 @@ if (isset($_SESSION['id'])) {
 
         <?php include 'includes/footer.php' ?>
         <script src="script.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     </body>
 
     </html>

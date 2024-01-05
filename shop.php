@@ -1,10 +1,8 @@
 ﻿<?php
 include 'database_connection.php';
 session_start();
-if ($_SESSION['username'] && isset($_SESSION['id'])) {
+if (isset($_SESSION['id'])) {
 ?>
-    <!DOCTYPE html>
-    <html lang="en">
     <?php include 'includes/head.php' ?>
 
     <body>
@@ -40,7 +38,7 @@ if ($_SESSION['username'] && isset($_SESSION['id'])) {
         </section>
         <?php include 'includes/footer.php' ?>
         <script src="script.js"></script>
-        <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- <script src="bootstrap/js/bootstrap.bundle.min.js"></script> -->
     </body>
 
     </html>

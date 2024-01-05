@@ -18,11 +18,6 @@ $client_id = $_SESSION['id'];
                 </a>
             </li>
             <li>
-                <a href="customize.php">
-                    <i class="bi bi-columns-gap"></i>&nbsp; Customize
-                </a>
-            </li>
-            <li>
                 <a href="cart.php" class="position-relative">
                     <span class="cart-notif" id="cart-notif">
                         <?php
@@ -48,6 +43,54 @@ $client_id = $_SESSION['id'];
                 <a href="contact.php">
                     <i class="bi bi-telephone"></i>&nbsp; Contact
                 </a>
+            </li>
+
+            <li class="dropdown">
+                <a class="d-flex align-items-center" href="#" data-bs-toggle="dropdown">
+                    <span class="dropdown-toggle">More</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="customize.php">
+                            <i class="bi bi-columns-gap"></i>
+                            &nbsp; Customize
+                        </a>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="my-customize.php">
+                            <i class="bi bi-columns"></i>
+                            &nbsp; My Saved Designs
+                        </a>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="account.php">
+                            <i class="bi bi-person-circle"></i>
+                            &nbsp; Account
+                        </a>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="logout.php">
+                            <i class="bi bi-power"></i>
+                            &nbsp; Signout
+                        </a>
+                    </li>
+
+                </ul><!-- End Profile Dropdown Items -->
             </li>
         </ul>
     </div>
