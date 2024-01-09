@@ -163,6 +163,47 @@ if (isset($_SESSION['id'])) {
                                                     ?>
                                                 </fieldset>
                                                 <hr class="my-3">
+                                                <h5>My Logo</h5>
+                                                <fieldset class="fieldset d-flex align-items-center">
+                                                    <?php
+                                                    $stmt = $conn->prepare(' SELECT * FROM tbl_client_logos WHERE client_id = ? ORDER BY id ASC');
+                                                    $stmt->bind_param('i', $client_id);
+                                                    $stmt->execute();
+                                                    $result = $stmt->get_result();
+                                                    if (mysqli_num_rows ($result) > 0) {
+                                                        $row = $result->fetch_assoc();
+                                                        $num = $row['id'];
+                                                        $img_url = $row['img_url'];
+                                                        echo '
+                                                            <div class="fieldset-item me-2">
+                                                                <input class="form-check-input" type="radio" name="logo" id="client_logo' . $num . '" value="' . $img_url . '" style="position: absolute; left: -9999px;" required>
+                                                                <label class="form-check-label rounded-radio" for="client_logo' . $num . '" onclick="client_logo' . $num . 'Fn()">
+                                                                    <img src="IMG/client-logos/' . $img_url . '" width="50" style="cursor: pointer; border-radius: 50%" alt="">
+                                                                </label>
+                                                            </div>
+                                                            ';
+                                                    } else {
+                                                        echo '
+                                                        <div>
+                                                            <form action="checking/upload-logo.php" method="post">
+                                                                <div class="d-flex align-items-end py-3">
+                                                                    <img src="#" width="50" height="50" alt="Logo" class="me-3" style="border: 1px solid #000; border-radius: 50%;" id="uploadedImg">
+                                                                    <label for="upload" class="btn btn-primary btn-sm" tabindex="0" id="upload-btn">
+                                                                        <span class="d-none d-sm-block text-white">
+                                                                            <i class="bi bi-upload"></i></i>&nbsp;Upload
+                                                                        </span>
+                                                                        <i class="bx bx-upload d-block d-sm-none"></i>
+                                                                        <input name="img_url" type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" />
+                                                                    </label>
+                                                                    <button class="btn btn-danger btn-sm ms-1 account-image-reset" title="Remove profile image" id="remove-btn" style="display: none;"><i class="bi bi-trash"></i></button>
+                                                                </div>
+                                                            </form>
+                                                        </div>';
+                                                    }
+                                                    
+                                                    ?>
+                                                </fieldset>
+                                                <hr class="my-3">
                                                 <h5>Patterns</h5>
                                                 <fieldset class="fieldset d-flex align-items-center">
                                                     <?php
@@ -242,14 +283,11 @@ if (isset($_SESSION['id'])) {
                                                         ';
                                                     }
                                                     ?>
-                                                    <!-- <span class="p-5 w-50" style="transform: rotateY(60deg); background-color: #f6f9ff; right: 40px; bottom: 0px; z-index: 1000; border-radius: 45%; position: relative;"></span> -->
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12 relative">
                                                 <h5 style="position: relative;">Back</h5>
                                                 <div style="position: relative;">
-                                                    <!-- <div class="p-5" style="transform: rotate(60deg); background-color: #f6f9ff; right: 190px; top: 70px; z-index: 1000; border-radius: 45%; position: absolute;"></div> -->
-                                                    <!-- <div class="p-5" style="transform: rotate(60deg); background-color: #f6f9ff; right: 8px; top: 70px; z-index: 1000; border-radius: 45%; position: absolute;"></div> -->
                                                     <input type="text" id="name-position-back1" style="visibility: hidden;" readonly>
                                                     <input type="text" id="name-position-back2" style="visibility: hidden;" readonly>
                                                     <i class="bx bxs-t-shirt shirts mt-4" id="back" style="color: #007BFF; position: relative;"></i>
@@ -285,6 +323,28 @@ if (isset($_SESSION['id'])) {
 
         <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="assets/js/main.js" defer></script>
+        <script>
+            'use strict';
+            document.addEventListener('DOMContentLoaded', function(e) {
+                (function() {
+                    let accountUserImage = document.getElementById('uploadedImg');
+                    const fileInput = document.querySelector('.account-file-input'),
+                        resetFileInput = document.querySelector('.account-image-reset');
+                    if (accountUserImage) {
+                        const resetImage = accountUserImage.src;
+                        fileInput.onchange = () => {
+                            if (fileInput.files[0]) {
+                                accountUserImage.src = window.URL.createObjectURL(fileInput.files[0]);
+                            }
+                        };
+                        resetFileInput.onclick = () => {
+                            fileInput.value = '';
+                            accountUserImage.src = resetImage;
+                        };
+                    }
+                })();
+            });
+        </script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var radioName = document.querySelectorAll('input[name="bg_color"]');
