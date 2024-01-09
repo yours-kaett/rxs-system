@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 25, 2023 at 08:47 AM
+-- Generation Time: Jan 09, 2024 at 08:26 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -56,12 +56,12 @@ INSERT INTO `tbl_admin` (`id`, `email`, `username`, `password`, `firstname`, `mi
 DROP TABLE IF EXISTS `tbl_client`;
 CREATE TABLE IF NOT EXISTS `tbl_client` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `username` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `firstname` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `middlename` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `lastname` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `firstname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `middlename` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `lastname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -102,24 +102,28 @@ CREATE TABLE IF NOT EXISTS `tbl_customize` (
   `id` int NOT NULL AUTO_INCREMENT,
   `bg_color` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `name_input` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `name_direction` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name_direction` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `team_name_input` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `team_name_direction` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `team_name_direction` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `number_input` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `number_direction` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `number_direction` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `logo` varchar(50) NOT NULL,
   `pattern` varchar(50) NOT NULL,
   `font` varchar(50) NOT NULL,
+  `transaction_status_id` int NOT NULL,
   `client_id` int NOT NULL,
+  `created_at` varchar(50) NOT NULL,
+  `updated_at` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tbl_customize`
 --
 
-INSERT INTO `tbl_customize` (`id`, `bg_color`, `name_input`, `name_direction`, `team_name_input`, `team_name_direction`, `number_input`, `number_direction`, `logo`, `pattern`, `font`, `client_id`) VALUES
-(2, 'bg-secondary', 'Engbino', 'name-position-top', 'Team Bu-ok', 'team-name-position-top', '04', 'number-position-front-right', 'logo2', 'pattern3', 'Times New Roman', 4);
+INSERT INTO `tbl_customize` (`id`, `bg_color`, `name_input`, `name_direction`, `team_name_input`, `team_name_direction`, `number_input`, `number_direction`, `logo`, `pattern`, `font`, `transaction_status_id`, `client_id`, `created_at`, `updated_at`) VALUES
+(5, '#28a745', 'THIS IS TEST', 'position: relative; top: 110px; left: 30px; background-color: transparent; border: none; text-align: center; outline: none; display: flex; color: #fff; z-index: 1;', 'TEAM BAAAANG', 'position: relative; top: 205px; left: 30px; background-color: transparent; border: none; text-align: center; outline: none; display: flex; color: #fff; z-index: 1;', '04', 'position: relative; top: 100px; left: 150px; background-color: transparent; border: none; width: 50px; text-align: center; outline: none; display: flex; color: #fff; z-index: 9999;', 'RAPTORS.png', 'pattern2.png', 'Times New Roman', 2, 4, '', ''),
+(7, '#6c757d', 'test', 'position: relative; top: 110px; left: 30px; background-color: transparent; border: none; text-align: center; outline: none; display: flex; color: #fff; z-index: 1;', 'wewewew', 'position: relative; top: 110px; left: 28px; background-color: transparent; border: none; text-align: center; outline: none; display: flex; color: #fff; z-index: 1;', '01', 'position: relative; top: 100px; left: 60px; background-color: transparent; border: none; width: 50px; text-align: center; outline: none; display: flex; color: #fff; z-index: 1;', 'RAPTORS.png', 'pattern3.png', 'Times New Roman', 2, 4, '', '');
 
 -- --------------------------------------------------------
 
@@ -189,34 +193,16 @@ CREATE TABLE IF NOT EXISTS `tbl_orders` (
   `created_at` varchar(50) NOT NULL,
   `updated_at` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=126 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=142 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tbl_orders`
 --
 
 INSERT INTO `tbl_orders` (`id`, `img_url`, `shirt_id`, `invoice_number`, `name`, `shirt_code`, `shirt_price`, `jersey_number`, `size_id`, `team_name`, `jersey_type_id`, `transaction_status_id`, `client_id`, `created_at`, `updated_at`) VALUES
-(125, 'P2.jpg', 2, 'rxs6122-002', 'Umukagi', 'P0002', '200', 36, 3, 'Team Pla', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(124, 'P2.jpg', 2, 'rxs6122-002', 'Meruem', 'P0002', '200', 26, 2, 'Team Pla', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(123, 'P2.jpg', 2, 'rxs6122-002', 'Ging', 'P0002', '200', 48, 3, 'Team Pla', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(122, 'P2.jpg', 2, 'rxs6122-002', 'Netero', 'P0002', '200', 62, 2, 'Team Pla', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(121, 'P2.jpg', 2, 'rxs6122-002', 'Illumi', 'P0002', '200', 27, 3, 'Team Pla', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(120, 'P2.jpg', 2, 'rxs6122-002', 'Chrollo', 'P0002', '200', 28, 3, 'Team Pla', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(119, 'P2.jpg', 2, 'rxs6122-002', 'Morrow', 'P0002', '200', 32, 3, 'Team Pla', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(118, 'P2.jpg', 2, 'rxs6122-002', 'Leorio', 'P0002', '200', 16, 3, 'Team Pla', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(117, 'P2.jpg', 2, 'rxs6122-002', 'Curta', 'P0002', '200', 17, 2, 'Team Pla', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(116, 'P2.jpg', 2, 'rxs6122-002', 'Zoldyck', 'P0002', '200', 13, 1, 'Team Pla', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(115, 'P2.jpg', 2, 'rxs6122-002', 'Freecs', 'P0002', '200', 12, 1, 'Team Pla', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(114, 'P1.jpg', 1, 'rxs6122-001', 'Juanso', 'P0001', '200', 27, 2, 'Team Bu-ok', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(113, 'P1.jpg', 1, 'rxs6122-001', 'Indo', 'P0001', '200', 16, 3, 'Team Bu-ok', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(112, 'P1.jpg', 1, 'rxs6122-001', 'Handog', 'P0001', '200', 29, 1, 'Team Bu-ok', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(111, 'P1.jpg', 1, 'rxs6122-001', 'Ganado', 'P0001', '200', 16, 3, 'Team Bu-ok', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(110, 'P1.jpg', 1, 'rxs6122-001', 'Fuli', 'P0001', '200', 21, 2, 'Team Bu-ok', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(109, 'P1.jpg', 1, 'rxs6122-001', 'Empera', 'P0001', '200', 14, 2, 'Team Bu-ok', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(108, 'P1.jpg', 1, 'rxs6122-001', 'Dulaso', 'P0001', '200', 30, 1, 'Team Bu-ok', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(107, 'P1.jpg', 1, 'rxs6122-001', 'Cabuya', 'P0001', '200', 2, 3, 'Team Bu-ok', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(106, 'P1.jpg', 1, 'rxs6122-001', 'Balusi', 'P0001', '200', 10, 2, 'Team Bu-ok', 2, 3, 4, 'December 25, 2023', 'December 25, 2023'),
-(105, 'P1.jpg', 1, 'rxs6122-001', 'Abante', 'P0001', '200', 1, 1, 'Team Bu-ok', 2, 3, 4, 'December 25, 2023', 'December 25, 2023');
+(141, 'P1.jpg', 1, 'rxs6122-001', 'test3', 'P0001', '200', 3, 3, 'Team Test', 2, 2, 4, 'January 9, 2024', 'January 9, 2024'),
+(140, 'P1.jpg', 1, 'rxs6122-001', 'test2', 'P0001', '200', 2, 2, 'Team Test', 2, 2, 4, 'January 9, 2024', 'January 9, 2024'),
+(139, 'P1.jpg', 1, 'rxs6122-001', 'test1', 'P0001', '200', 1, 1, 'Team Test', 2, 2, 4, 'January 9, 2024', 'January 9, 2024');
 
 -- --------------------------------------------------------
 
@@ -249,10 +235,10 @@ INSERT INTO `tbl_patterns` (`id`, `img_url`) VALUES
 DROP TABLE IF EXISTS `tbl_shirt`;
 CREATE TABLE IF NOT EXISTS `tbl_shirt` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `shirt_title` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `shirt_code` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `shirt_price` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `img_url` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `shirt_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `shirt_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `shirt_price` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `img_url` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `shirt_category_id` tinyint NOT NULL,
   `jersey_type_id` tinyint NOT NULL,
   PRIMARY KEY (`id`),
@@ -297,7 +283,7 @@ INSERT INTO `tbl_shirt` (`id`, `shirt_title`, `shirt_code`, `shirt_price`, `img_
 DROP TABLE IF EXISTS `tbl_shirt_category`;
 CREATE TABLE IF NOT EXISTS `tbl_shirt_category` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `shirt_category` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `shirt_category` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -334,7 +320,7 @@ INSERT INTO `tbl_size` (`id`, `size`) VALUES
 (2, 'Medium'),
 (3, 'Large'),
 (4, 'Exrta Large'),
-(5, 'Double Extra Large');
+(5, 'Double XL');
 
 -- --------------------------------------------------------
 
@@ -347,14 +333,14 @@ CREATE TABLE IF NOT EXISTS `tbl_transaction` (
   `id` int NOT NULL AUTO_INCREMENT,
   `client_id` int NOT NULL,
   `shirt_title_id` int NOT NULL,
-  `shirt_code` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `shirt_price` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `shirt_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `shirt_price` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `order_quantity` int NOT NULL,
-  `total_payment` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `img_url` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `total_payment` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `img_url` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `shirt_category_id` int NOT NULL,
   `transaction_status` int NOT NULL,
-  `team_name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `team_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `jersey_type_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `client_id` (`client_id`),
@@ -373,7 +359,7 @@ CREATE TABLE IF NOT EXISTS `tbl_transaction` (
 DROP TABLE IF EXISTS `tbl_transaction_status`;
 CREATE TABLE IF NOT EXISTS `tbl_transaction_status` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `transaction_status` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `transaction_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
