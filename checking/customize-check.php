@@ -34,11 +34,15 @@ if (isset($_SESSION['id'])) {
         $logo = validate($_POST['logo']);
         $pattern = validate($_POST['pattern']);
         $font = validate($_POST['font']);
+        $transaction_status_id = 2;
+        date_default_timezone_set('Asia/Manila');
+        $created_at = date("F j, Y");
+        $updated_at = date("F j, Y");
 
         $stmt = $conn->prepare(' INSERT INTO tbl_customize (bg_color, name_input, name_direction, team_name_input, 
-        team_name_direction, number_input, number_direction, logo, pattern, font, client_id) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ');
-        $stmt->bind_param('ssssssssssi', $bg_color, $name_input, $name_direction, $team_name_input, $team_name_direction, $number_input, $number_direction, $logo, $pattern, $font, $client_id);
+        team_name_direction, number_input, number_direction, logo, pattern, font, transaction_status_id, client_id, created_at, updated_at) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ');
+        $stmt->bind_param('ssssssssssiiss', $bg_color, $name_input, $name_direction, $team_name_input, $team_name_direction, $number_input, $number_direction, $logo, $pattern, $font, $transaction_status_id, $client_id, $created_at, $updated_at);
         $stmt->execute();
         $stmt->close();
 

@@ -3,7 +3,25 @@ include 'database_connection.php';
 session_start();
 if (isset($_SESSION['id'])) {
     $client_id = $_SESSION['id'];
-    $stmt = $conn->prepare('SELECT * FROM tbl_customize WHERE client_id = ?');
+    $stmt = $conn->prepare('SELECT 
+    tbl_customize.id,
+    tbl_customize.bg_color,
+    tbl_customize.name_input,
+    tbl_customize.name_direction,
+    tbl_customize.team_name_input,
+    tbl_customize.team_name_direction,
+    tbl_customize.number_input,
+    tbl_customize.number_direction,
+    tbl_customize.logo,
+    tbl_customize.pattern,
+    tbl_customize.font,
+    tbl_customize.client_id,
+    tbl_customize.transaction_status_id,
+    tbl_transaction_status.transaction_status
+    FROM tbl_customize
+    INNER JOIN tbl_transaction_status ON tbl_customize.transaction_status_id = tbl_transaction_status.id
+    WHERE tbl_customize.client_id = ?
+    ORDER BY tbl_customize.id DESC ');
     $stmt->bind_param('i', $client_id);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -53,16 +71,30 @@ if (isset($_SESSION['id'])) {
                                         $logo = $row['logo'];
                                         $pattern = $row['pattern'];
                                         $font = $row['font'];
+                                        $transaction_status = $row['transaction_status'];
+                                        if ($transaction_status === "Pending") {
+                                            $status_indicator = "bg-danger p-1 text-white";
+                                            $display = "";
+                                        }
+                                        if ($transaction_status === "On-progress") {
+                                            $status_indicator = "bg-warning p-1 text-primary";
+                                            $display = "d-none";
+                                        }
+                                        if ($transaction_status === "Delivered") {
+                                            $status_indicator = "bg-success p-1 text-white";
+                                            $display = "d-none";
+                                        }
                                         echo '
                                         <div class="row">
                                             <div class="col-12 py-4">
+                                                <p>Status: <span class="' . $status_indicator . '">' . $transaction_status . '</span></p>
                                                 <a href="checking/order-customize.php?id=' . $id . '">
-                                                    <button class="btn btn-success" type="button">
+                                                    <button class="btn btn-success ' . $display . '" type="button">
                                                         <i class="bi bi-basket"></i>&nbsp; Order
                                                     </button>
                                                 </a>
                                                 <a href="checking/remove-customize.php?id=' . $id . '">
-                                                    <button class="btn btn-danger">
+                                                    <button class="btn btn-danger ' . $display . '">
                                                         <i class="bi bi-trash"></i>&nbsp; Remove
                                                     </button>
                                                 </a>
@@ -112,29 +144,29 @@ if (isset($_SESSION['id'])) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
         <script>
             function captureScreenshot() {
-    // Send a request to the server to generate the document file
-    fetch('generateDocument.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ content: document.documentElement.outerHTML }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Handle the response from the server (e.g., provide a download link)
-        var link = document.createElement('a');
-        link.href = data.fileUrl;
-        link.download = 'document.docx';
-        link.click();
-    });
-}
+            // Send a request to the server to generate the document file
+            fetch('generateDocument.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ content: document.documentElement.outerHTML }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response from the server (e.g., provide a download link)
+                var link = document.createElement('a');
+                link.href = data.fileUrl;
+                link.download = 'document.docx';
+                link.click();
+            });
+        }
 
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'p' || event.key === 'P') {
-        captureScreenshot();
-    }
-});
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'p' || event.key === 'P') {
+                captureScreenshot();
+            }
+        });
         </script>
     </body>
 

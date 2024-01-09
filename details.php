@@ -225,7 +225,7 @@ if ($_SESSION['username'] && isset($_SESSION['id'])) {
                 let rowCounter = 0;
                 addRowButton.addEventListener("click", function() {
                     const newRow = document.createElement("div");
-                    newRow.classList.add("row");
+                    newRow.classList.add("row", "d-flex", "align-items-end");
                     newRow.innerHTML = `
                         <div class="col-lg-4 col-md-4 mb-2">
                             <div class="form-group">
@@ -233,7 +233,7 @@ if ($_SESSION['username'] && isset($_SESSION['id'])) {
                                 <input type="text" name="name[]" id="name" autocomplete="name" placeholder="ex. Dela Cruz" class="form-control w-100" required />
                             </div>
                             </div>
-                        <div class="col-lg-4 col-md-4 mb-2">
+                        <div class="col-lg-3 col-md-3 mb-2">
                             <div class="form-group">
                                 <label for="jersey_number">Jersey #</label>
                                 <input type="number" name="jersey_number[]" id="jersey_number" autocomplete="jersey_number" placeholder="ex. 04" class="form-control w-100" required />
@@ -256,9 +256,22 @@ if ($_SESSION['username'] && isset($_SESSION['id'])) {
                                 </select>
                             </div>
                         </div>
+                        <div class="col-lg-1 col-md-1 mb-2">
+                            <div class="form-group">
+                                <button class="btn btn-danger" id="remove_member">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            <div>
+                        </div>
                     `;
                     rowsContainer.appendChild(newRow);
                     rowCounter++;
+                    
+                    const removeButton = newRow.querySelector("#remove_member");
+                    removeButton.addEventListener("click", function() {
+                        rowsContainer.removeChild(newRow);
+                        rowCounter--;
+                    });
 
                     let name = document.getElementById("name");
                     let jersey_number = document.getElementById("jersey_number");

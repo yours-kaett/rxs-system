@@ -13,6 +13,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link collapsed" href="customize-orders.php">
+                <i class="bi bi-columns-gap"></i>
+                <span>Customize Orders</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link collapsed" href="display.php">
                 <i class="bi bi-binoculars"></i>
                 <span>Display</span>

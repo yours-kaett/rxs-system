@@ -36,7 +36,7 @@ if (isset($_SESSION['id'])) {
                             <div class="d-flex align-items-center justify-content-center mb-5">
                                 <p>Your cart is empty. 
                                     <a href="shop.php">
-                                        <button class="btn btn-primary p-3">Shop now!</button>
+                                        <button class="add-cart-btn p-3">Shop now!</button>
                                     </a>
                                 </p>
                             </div>
@@ -83,15 +83,19 @@ if (isset($_SESSION['id'])) {
                                 $transaction_status = $rows['transaction_status'];
                                 if ($transaction_status === "On-cart") {
                                     $indicatorColor = '#000';
+                                    $btn_visibility = "visible;";
                                 }
                                 if ($transaction_status === "Pending") {
                                     $indicatorColor = '#ff0000';
+                                    $btn_visibility = "visible;";
                                 }
                                 if ($transaction_status === "On-progress") {
                                     $indicatorColor = '#ffae00';
+                                    $btn_visibility = "hidden;";
                                 }
                                 if ($transaction_status === "Delivered") {
                                     $indicatorColor = '#109d00';
+                                    $btn_visibility = "hidden;";
                                 }
                                 echo '
                                         <div class="row rounded border p-3 mb-3">
@@ -111,11 +115,18 @@ if (isset($_SESSION['id'])) {
                                                     <span class="d-flex align-items-center justify-content-between">
                                                         <span class="fs-5 fw-bold" id="t-quantity" style="color: ' . $indicatorColor . '">' . $total_quantity . ' items</span>
                                                         <span class="fs-5 fw-bold" id="t-payment" style="visibility: hidden;">' . $total_payment . '</span>
-                                                        <a href="cart-details.php?invoice=' . $invoice_number . '">
-                                                            <button class="add-cart-btn" type="button">
-                                                                <i class="bi bi-eye"></i>&nbsp; View Cart Details
-                                                            </button>
-                                                        </a>
+                                                        <span class="d-flex align-items-center justify-content-between">
+                                                            <a href="checking/remove-cart.php?invoice=' . $invoice_number . '">
+                                                                <button class="add-cart-btn" type="button" style="background: red !important; visibility: ' . $btn_visibility . '">
+                                                                    <i class="bi bi-trash"></i>&nbsp; Remove
+                                                                </button>
+                                                            </a>
+                                                            <a href="cart-details.php?invoice=' . $invoice_number . '">
+                                                                <button class="add-cart-btn ms-1" type="button">
+                                                                    <i class="bi bi-eye"></i>&nbsp; View Cart Details
+                                                                </button>
+                                                            </a>
+                                                        </span>
                                                     </span>
                                                 </div>
                                             </div>
